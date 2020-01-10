@@ -1,0 +1,10 @@
+.root {
+	overflow: hidden;
+	position: relative;
+	margin-bottom: var(--line, 16px);
+}
+.invisible {
+	position: absolute;
+	top: -9999px;
+	opacity: 0;
+}

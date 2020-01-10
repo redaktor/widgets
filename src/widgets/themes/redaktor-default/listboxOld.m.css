@@ -1,0 +1,128 @@
+.root {
+	display: block;
+	position: relative;
+	padding: calc((var(--line) + var(--padding-top)) / 2) 0 0 0;
+	margin: 0 0 calc(var(--margin-bottom) / 2) 0;
+  overflow: hidden;
+	border-radius: var(--ui-border-radius-emphasized);
+	background-color: var(--ui-bg);
+	transform-origin: center top;
+	/*border: var(--ui-border-width) solid var(--ui-border);*/
+}
+.root:not(.raised):focus {
+	/*border-color: var(--ui-focus);*/
+	box-shadow: var(--ui-dp-1);
+	outline: none;
+}
+.raised {
+	box-shadow: var(--ui-dp-8);
+	transition: all var(--ui-dpd-8) var(--ui-easing);
+}
+
+.smallTypo, .defaultTypo, .mediumTypo, .largeTypo, .strongTypo,
+.smallUI, .defaultUI, .mediumUI, .largeUI, .responsive, .focused,
+.primary, .secondary, .parentSchema, .enabled, .disabled { }
+
+
+
+.optionWrapper {
+	position: relative;
+}
+
+ul.root,
+ul.root li.optionWrapper,
+ul.root ul li {
+	text-indent: 0;
+	list-style: none outside none;
+}
+
+.option {
+	composes: ui-typo-large from './_ui.m.css';
+}
+.root .option {
+	display: block;
+	position: relative;
+  overflow: hidden;
+	background-color: var(--ui-full);
+	margin: 0;
+	padding: calc((var(--line) + var(--padding-top)) / 2) var(--line) calc(var(--margin-bottom) / 2) var(--line);
+	transition: background-color var(--ui-dpd-animation) var(--ui-easing);
+}
+.enabled:hover .option,
+.enabled:not(:hover) .state:not(:checked) + .option:not(.activeOption) {
+	transition: background-color var(--ui-dpd-2) var(--ui-easing);
+}
+.option::before {
+	content: "";
+	opacity: .8;
+	position: absolute;
+  display: inline-block;
+  vertical-align: top;
+	left: 0px;
+	top: 50%;
+  width: 100%;
+  padding-bottom: 100%;
+	transform-origin: center;
+	transform: translate(0, -50%) scale(0,0);
+	border-radius: 50%;
+	transition: transform var(--ui-dpd-2) var(--ui-easing),
+		opacity var(--ui-dpd-animation) var(--ui-easing);
+}
+/* TODO small option = narrow spaced */
+.state, .hidden {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	appearance: none;
+	outline: none;
+	z-index: 9;
+}
+
+.state:checked + .option::before {
+	opacity: 0;
+	transform: translate(0, -50%) scale(1,1);
+	background-color: var(--ui-accent);
+}
+.state:checked + .option {
+	transition: background-color var(--ui-dpd-2) var(--ui-easing);
+	background-color: var(--ui-accent);
+}
+.enabled .state:hover {
+	cursor: pointer;
+}
+.enabled .state:hover:not(:checked) + .option {
+	background-color: var(--ui-hover);
+}
+.disabled .option {
+	background-color: var(--ui-disabled);
+	color: var(--text-muted);
+	cursor: default;
+}
+
+.activeOption { }
+.selectedOption { }
+.focused {}
+/*
+.state:checked + .option::before {
+	background-color: var(--ui-bg);
+}
+*/
+
+/* TODO parentSchema
+.focused .activeOption,
+.root:focus .activeOption {
+	border-bottom: var(--ui-border-width) solid var(--ui-focus);
+}
+.root .option:active,
+.root .option:focus {
+	background-color: red;
+}
+*/
+
+/*
+.selectedOption {
+	background-color: var(--ui-accent);
+	padding-right: calc(var(--grid-base) * 4);
+	position: relative;
+}
+*/

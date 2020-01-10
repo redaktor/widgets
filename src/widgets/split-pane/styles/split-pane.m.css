@@ -1,0 +1,46 @@
+.rootFixed {
+	align-content: stretch;
+	align-items: stretch;
+	display: flex;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+}
+
+.rowFixed {
+	flex-direction: column;
+}
+
+.dividerFixed {
+	background-clip: padding-box;
+	cursor: pointer;
+	flex: 0 0 auto;
+}
+
+.leadingFixed {
+	flex: 0 0 auto;
+}
+
+.columnFixed > .dividerFixed {
+	width: 1px;
+	cursor: ew-resize;
+}
+
+.rowFixed > .dividerFixed {
+	height: 1px;
+	cursor: ns-resize;
+}
+
+.trailingFixed {
+	flex: 1 1 0%;
+}
+
+.trailingFixed, .leadingFixed {
+	overflow: auto;
+}
+
+.rootFixed.collapsedFixed {
+	display: block;
+	overflow: auto;
+}

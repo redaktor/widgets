@@ -1,0 +1,9 @@
+.root {
+	padding: var(--line) var(--line) 0 var(--line);
+}
+.buttons button {
+	margin-right: var(--line);
+}
+.disabled.buttons {
+	margin-bottom: var(--line);
+}

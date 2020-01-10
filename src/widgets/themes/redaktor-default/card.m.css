@@ -1,0 +1,294 @@
+/* TODO */
+.parentSchema, .hasSchema { }
+
+.root {
+	composes: root from './button.m.css';
+	color: var(--text);
+  border-radius: var(--ui-border-radius-emphasized);
+  background-color: #fff;
+  background-color: var(--ui-bg, #fff);
+  box-sizing: border-box;
+  flex-direction: column;
+	padding-top: 0 !important;
+	margin-bottom: calc(var(--margin-bottom) + var(--padding-top)) !important;
+}
+
+.responsive {
+	composes: responsive from './_ui.m.css';
+  display: -ms-flexbox;
+	display: flex;
+}
+.root:not(.responsive) {
+	display: inline-block;
+	width: var(--ui-default-input-width);
+}
+.root:not(.raised) {
+	box-shadow: var(--ui-dp-1);
+}
+.raised {
+	box-shadow: var(--ui-dp-8);
+}
+.enabled { composes: enabled from './button.m.css'; }
+.disabled { composes: disabled from './button.m.css'; }
+.flat { composes: flat from './button.m.css'; }
+.filled { composes: filled from './button.m.css'; }
+.root:not(.outlined) {
+	border: none;
+}
+.outlined {
+	composes: outlined from './button.m.css';
+  box-shadow: var(--ui-dp-0);
+  /*border: 1px solid #e0e0e0*/
+}
+
+
+.media {
+  position: relative;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+}
+.media:before {
+  display: block;
+  content: "";
+}
+.media:first-child {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+.media:last-child {
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+.mediaSquare:before {
+  margin-top: 100%;
+}
+.media16_9:before {
+  margin-top: 56.25%;
+}
+.mediaContent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.mediaContent, .rootAction {
+  box-sizing: border-box;
+}
+.rootAction {
+  --mdc-ripple-fg-size: 0;
+  --mdc-ripple-left: 0;
+  --mdc-ripple-top: 0;
+  --mdc-ripple-fg-scale: 1;
+  --mdc-ripple-fg-translate-end: 0;
+  --mdc-ripple-fg-translate-start: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  will-change: transform, opacity;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  outline: none;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+.rootAction > p, .rootAction > h1, .rootAction > h2, .rootAction > h3,
+.rootAction > h4, .rootAction > h5, .rootAction > h6, .rootAction > b,
+.rootAction > i, .rootAction > ol, .rootAction > ul, .rootAction > dl,
+.rootAction > figcaption {
+	padding-left: var(--ui-lr-content);
+	padding-right: var(--ui-lr-content);
+}
+.rootAction:after, .rootAction:before {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  content: "";
+}
+
+.rootAction:before {
+  transition: opacity 15ms linear, background-color 15ms linear;
+  z-index: 1;
+}
+
+.rootAction.ripple-upgraded:before {
+  transform: scale(var(--mdc-ripple-fg-scale, 1));
+}
+
+.rootAction.ripple-upgraded:after {
+  top: 0;
+  left: 0;
+  transform: scale(0);
+  transform-origin: center center;
+}
+
+.rootAction.ripple-upgraded--unbounded:after {
+  top: var(--mdc-ripple-top, 0);
+  left: var(--mdc-ripple-left, 0);
+}
+
+.rootAction.ripple-upgraded--foreground-activation:after {
+  animation: mdc-ripple-fg-radius-in 225ms forwards, mdc-ripple-fg-opacity-in 75ms forwards;
+}
+
+.rootAction.ripple-upgraded--foreground-deactivation:after {
+  animation: mdc-ripple-fg-opacity-out .15s;
+  transform: translate(var(--mdc-ripple-fg-translate-end, 0)) scale(var(--mdc-ripple-fg-scale, 1));
+}
+
+.rootAction:after, .rootAction:before {
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+}
+
+.rootAction.ripple-upgraded:after {
+  width: var(--mdc-ripple-fg-size, 100%);
+  height: var(--mdc-ripple-fg-size, 100%);
+}
+
+.rootAction:after, .rootAction:before {
+  background-color: #000;
+}
+
+.rootAction:hover:before {
+  opacity: .04;
+}
+
+.rootAction.ripple-upgraded--background-focused:before,
+.rootAction:not(.ripple-upgraded):focus:before {
+  transition-duration: 75ms;
+  opacity: .12;
+}
+
+.rootAction:not(.ripple-upgraded):after {
+  transition: opacity .15s linear;
+}
+
+.rootAction:not(.ripple-upgraded):active:after {
+  transition-duration: 75ms;
+  opacity: .12;
+}
+
+.rootAction.ripple-upgraded {
+  --mdc-ripple-fg-opacity: 0.12;
+}
+
+.rootAction:first-child {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.rootAction:last-child {
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: var(--line) var(--lineHalf) var(--line) var(--lineHalf);
+
+}
+
+.actionsFullBleed {
+  padding: 0;
+}
+
+.actionButtons, .actionIcons {
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.actionIcons {
+  color: rgba(0, 0, 0, .38);
+  color: var(--mdc-theme-textIcon-on-background, rgba(0, 0, 0, .38));
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.actionButtons + .actionIcons {
+  margin-left: 16px;
+  margin-right: 0;
+}
+
+.actionButtons + .actionIcons[dir=rtl], [dir=rtl] .actionButtons + .actionIcons {
+  margin-left: 0;
+  margin-right: 16px;
+}
+
+.action {
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  -ms-flex-pack: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.action:focus {
+  outline: none;
+}
+
+.actionButton {
+  margin-left: 0;
+  margin-right: 8px;
+  padding: 0 8px;
+}
+
+.actionButton[dir=rtl], [dir=rtl] .actionButton {
+  margin-left: 8px;
+  margin-right: 0
+}
+
+.actionButton:last-child, .actionButton:last-child[dir=rtl],
+[dir=rtl] .actionButton:last-child {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.actionsFullBleed .actionButton {
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  margin: 0;
+  padding: 8px 16px;
+  text-align: left;
+}
+
+.actionsFullBleed .actionButton[dir=rtl],
+[dir=rtl] .actionsFullBleed .actionButton {
+  text-align: right;
+}
+
+.actionIcon {
+  margin: -6px 0;
+  padding: 12px;
+}
+.actionIcon:not(:disabled) {
+  color: rgba(0, 0, 0, .38);
+  color: var(--mdc-theme-textIcon-on-background, rgba(0, 0, 0, .38));
+}

@@ -1,0 +1,132 @@
+/*@import './progressLinear.m.css';
+.smallTypo, .defaultTypo, .mediumTypo, .largeTypo, .strongTypo,
+.smallUI, .defaultUI, .mediumUI, .largeUI, .primary, .secondary, .parentSchema,
+.horizontal, .vertical, .input, .wrapper, .prefix, .suffix, .track, .fill,
+.tickMarks, .tickLabels, .even, .uneven, .current, .responsive, .disabled, .enabled {}
+.labeled, .hasPrefix, .hasSuffix {}*/
+.root {
+	composes: root from './progressLinear.m.css';
+	composes: root from './cb.m.css';
+}
+.wrapper { composes: wrapper from './progressLinear.m.css'; }
+.inner { composes: inner from './_ui.m.css'; }
+.input { composes: input from './progressLinear.m.css'; }
+.horizontal { composes: horizontal from './progressLinear.m.css'; }
+.vertical { composes: vertical from './progressLinear.m.css'; }
+.track { composes: track from './progressLinear.m.css'; }
+.fill { composes: fill from './progressLinear.m.css'; }
+.tickMarks { composes: tickMarks from './progressLinear.m.css'; }
+.tickLabels { composes: tickLabels from './progressLinear.m.css'; }
+.even { composes: even from './progressLinear.m.css'; }
+.uneven { composes: uneven from './progressLinear.m.css'; }
+.current { composes: current from './progressLinear.m.css'; }
+.enabled { composes: enabled from './progressLinear.m.css'; }
+.disabled { composes: disabled from './progressLinear.m.css'; }
+.labeled { composes: labeled from './progressLinear.m.css'; }
+.prefix { composes: prefix from './progressLinear.m.css'; }
+.suffix { composes: suffix from './progressLinear.m.css'; }
+.hasPrefix { composes: hasPrefix from './progressLinear.m.css'; }
+.hasSuffix { composes: hasSuffix from './progressLinear.m.css'; }
+.responsive { composes: responsive from './progressLinear.m.css'; }
+.valid { composes: valid from './progressLinear.m.css'; }
+.invalid { composes: invalid from './progressLinear.m.css'; }
+.absolute { composes: absolute from './progressLinear.m.css'; }
+.smallUI { composes: smallUI from './progressLinear.m.css'; }
+.defaultUI { composes: defaultUI from './progressLinear.m.css'; }
+.mediumUI { composes: mediumUI from './progressLinear.m.css'; }
+.largeUI { composes: largeUI from './progressLinear.m.css'; }
+.smallTypo { composes: smallTypo from './_ui.m.css'; }
+.defaultTypo { composes: defaultTypo from './_ui.m.css'; }
+.mediumTypo { composes: mediumTypo from './_ui.m.css'; }
+.largeTypo { composes: largeTypo from './_ui.m.css'; }
+.strongTypo { composes: strongTypo from './_ui.m.css'; }
+
+.outputNone { composes: outputNone from './progressLinear.m.css'; }
+.outputInline { composes: outputInline from './progressLinear.m.css'; }
+.outputTooltip { composes: outputTooltip from './progressLinear.m.css'; }
+.hasSchema { }
+.slideLabel { }
+.staticLabel { }
+.noLabel { }
+.focused  { }
+.required { }
+.filled, .outlined, .shaped { }
+
+.input {
+	height: var(--ui-inner-h);
+	outline: none;
+}
+.horizontal .input {
+	transform: translate(0,-50%);
+	top: var(--ui-track-half-h);
+	left: 0px;
+}
+.vertical .input {
+	top: 0px;
+	left: calc(var(--ui-inner-h) / 2 * -1);
+	transform-origin: 0 0;
+	transform: rotate(-90deg) translate(-100%, 0);
+}
+
+.horizontal .wrapper:not(.hasPrefix):not(.hasSuffix) {
+	padding: 0 calc(var(--ui-inner-h) / 2) 0 calc(var(--ui-inner-h) / 2);
+}
+.vertical .wrapper:not(.hasPrefix):not(.hasSuffix) {
+	padding: calc(var(--ui-inner-h) / 2) 0 calc(var(--ui-inner-h) / 2) 0;
+}
+/* Adjustment knob */
+.thumb {
+	composes: toggleSwitch from './checkbox.m.css';
+}
+.root .thumb {
+	top: calc((var(--ui-inner-h) / 2) * -1 + var(--ui-track-half-h));
+	transform: translate(-50%, 0);
+	background-color: var(--ui-full);
+	z-index: 4;
+}
+.root .thumb::before {
+	transition: all var(--ui-dpd-2) var(--ui-easing);
+}
+
+.parentSchema .thumb {
+	background-color: var(--ui-border);
+}
+.disabled .thumb,
+.readonly .thumb {
+	opacity: 1;
+	background-color: var(--ui-flat);
+}
+.valid .thumb {
+	border-color: var(--ui-success);
+}
+.invalid .thumb {
+	border-color: var(--ui-error);
+}
+
+/* native RANGE input */
+.input::-ms-thumb {
+	height: var(--touch-target-min);
+	width: var(--touch-target-min);
+}
+.input::-moz-range-thumb {
+	height: var(--touch-target-min);
+	width: var(--touch-target-min);
+}
+.input::-webkit-slider-thumb {
+	height: var(--touch-target-min);
+	width: var(--touch-target-min);
+}
+
+/* focused styles */
+.input:focus ~ .track { }
+.input:focus ~ .track .thumb::before {
+	opacity: var(--ui-opacity-strong);
+	box-shadow: 0px 0px 0 var(--lineHalf) var(--ui-accent);
+}
+
+.input:focus ~ .outputTooltip,
+.root:hover .outputTooltip {
+	opacity: 1;
+	pointer-events: auto;
+	z-index: var(--zindex-tooltip);
+}

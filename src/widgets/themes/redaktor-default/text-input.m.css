@@ -1,0 +1,381 @@
+
+.wrapper { composes: wrapper from './_ui.m.css'; }
+.inner { composes: inner from './_ui.m.css'; }
+.input { composes: input from './_ui.m.css'; }
+.prefix { composes: prefix from './_ui.m.css'; }
+.suffix { composes: suffix from './_ui.m.css'; }
+.hasPrefix { composes: hasPrefix from './_ui.m.css'; }
+.hasSuffix { composes: hasSuffix from './_ui.m.css'; }
+.responsive { composes: responsive from './_ui.m.css'; }
+.square { composes: square from './_ui.m.css'; }
+.absolute { composes: absolute from './_ui.m.css'; }
+
+.smallUI { composes: smallUI from './_ui.m.css'; }
+.defaultUI { composes: defaultUI from './_ui.m.css'; }
+.mediumUI { composes: mediumUI from './_ui.m.css'; }
+.largeUI { composes: largeUI from './_ui.m.css'; }
+.smallTypo { composes: smallTypo from './_ui.m.css'; }
+.defaultTypo { composes: defaultTypo from './_ui.m.css'; }
+.mediumTypo { composes: mediumTypo from './_ui.m.css'; }
+.largeTypo { composes: largeTypo from './_ui.m.css'; }
+
+.parentSchema { }
+.valid { }
+.root {
+	composes: ui-transition from './_ui.m.css';
+	--input-text: var(--text);
+	--input-text-muted: var(--text-muted);
+	--input-border-bottom: calc(var(--line) / 5);
+	--input-border-distance: calc(var(--line) - var(--input-border-bottom));
+	--input-fill: var(--ui-fill);
+	--root-border: var(--ui-border);
+	--root-bg: var(--bg);
+	--root-disabled: var(--ui-disabled);
+	margin-top: 0;
+  margin-bottom: 0;
+	min-height: var(--ui-outer-h);
+	position: relative !important; /* required for dropdown */
+}
+.root:not(.smallUI) {
+	padding-top: var(--line);
+}
+.root .wrapper {
+	position: relative;
+	height: var(--ui-wrap-h);
+	margin: calc(var(--ui-t) * -1) 0 var(--ui-inner-b) 0;
+	padding: 0;
+}
+
+/* TODO special large ... */
+.root .wrapper.largeUI {
+	--size: 1.4285714285714286;
+  --cap-h: 0.8;
+  --line-h: 1.1;
+	height: calc(var(--line, 16px) * 4);
+	padding-top: var(--margin-bottom);
+}
+/* <-- see also label */
+
+.enabled .wrapper:hover {
+	cursor: pointer;
+}
+
+.filled, .outlined, .shaped { }
+
+.root .input, .root .prefix, .root .suffix {
+	font: inherit;
+	font-weight: normal;
+	line-height: inherit;
+	padding-top: 0;
+	padding-bottom: 0;
+	height: 100%;
+	margin: 0;
+	position: relative;
+	color: var(--input-text);
+  border: var(--ui-border-width) solid var(--ui-border);
+	transition: all var(--ui-dpd-1) var(--ui-easing);
+	transform: translate3d(0, 0, 0);
+}
+
+.root .prefix {
+	border-right: var(--ui-border-width) solid transparent;
+}
+.root .suffix {
+	border-left: var(--ui-border-width) solid transparent;
+}
+.root .prefix + .input {
+	align-self: flex-start;
+}
+
+.root .prefix,
+.root .suffix {
+	align-self: center;
+	border-color: transparent;
+	display: inline-block;
+	min-width: var(--ui-wrap-h);
+	height: auto;
+	margin: 0;
+}
+.number { }
+.root.number .prefix,
+.root.number .suffix {
+	min-width: 0;
+	padding: 0 0.618ch 0 0;
+}
+.native { }
+.arrows { }
+.plusminus { }
+input[type=number]:not(.native) {
+  -moz-appearance: textfield;
+}
+input[type=number]:not(.native)::-webkit-inner-spin-button,
+input[type=number]:not(.native)::-webkit-outer-spin-button {
+	cursor: pointer;
+  opacity: 0;
+  margin: 0;
+}
+input[type=number]::-webkit-textfield-decoration-container {
+  background-position: center right;
+	background-repeat: no-repeat;
+}
+.arrows[type=number]:focus::-webkit-textfield-decoration-container,
+.arrows[type=number]:hover::-webkit-textfield-decoration-container {
+	background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="64px" height="66px" viewBox="0 0 64 66"><polyline fill="black" points="60,38 32,66 4,38"/><polyline fill="black" points="4,28 32,0 60,28"/></svg>');
+	background-size: auto var(--line, 16px);
+}
+.plusminus[type=number]:focus::-webkit-textfield-decoration-container,
+.plusminus[type=number]:hover::-webkit-textfield-decoration-container {
+	background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64"><polygon fill="black" points="44,12 34,12 34,2 30,2 30,12 20,12 20,16 30,16 30,26 34,26 34,16 44,16 "/><rect x="20" y="49.999" fill="black" width="24" height="4"/></svg>');
+	background-size: auto calc(var(--line, 16px) + 4px);
+}
+.root .input {
+	padding-left: 0;
+	border-color: transparent;
+	background: inherit;
+	width: calc(var(--ui-input-width, 100%) * var(--small-size, 0.8333333));
+}
+
+input.input::placeholder,
+input.input:placeholder-shown {
+	color: var(--input-text-muted);
+	line-height: var(--line, 16px);
+	margin: var(--ui-border-width) 0 0 0;
+}
+
+.root div[pseudo="-webkit-textfield-decoration-container"] {
+	color: red;
+	text-align: right;
+}
+
+.invalid .input,
+.enabled .input:invalid {
+	caret-color: var(--ui-error);
+}
+
+
+.helperText {
+	composes: helperText from './_ui.m.css';
+	font-style: italic;
+}
+.invalid .helperText {
+	color: var(--ui-error);
+}
+/* animated borders */
+.border,
+.border::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	height: var(--ui-border-width-emphasized);
+	line-height: 0;
+	width: 100%;
+	cursor: text;
+}
+.border {
+	bottom: var(--input-border-bottom);
+}
+.enabled:not(.outlined) .border {
+	transition: background-color var(--ui-dpd-0) var(--ui-easing);
+}
+.filled .input:not(:focus) ~ .border {
+	height: var(--ui-border-width);
+}
+
+.border::after {
+	bottom: 0;
+	right: 0;
+	transform: scaleX(0);
+  pointer-events: none;
+	transition: all var(--ui-dpd-3) var(--ui-easing) 0ms;
+}
+.enabled:not(.invalid):not(.outlined) .input:not(:invalid) ~ .border {
+	background-color: var(--ui-border);
+}
+.enabled:not(.invalid).outlined .input:not(:invalid) ~ .border {
+	background-color: transparent;
+}
+.enabled:not(.invalid):not(.outlined) .wrapper:hover .input:not(:focus):not(:invalid) ~ .border {
+	background-color: var(--ui-hover-border);
+}
+.enabled:not(.invalid):not(.outlined) .input:not(:invalid) ~ .border::after {
+	background-color: var(--ui-flat);
+}
+.enabled:not(.invalid):not(.outlined) .parentSchema .input:not(:invalid) ~ .border::after {
+	background-color: var(--ui-accent);
+}
+.invalid:not(.outlined) .border,
+.invalid:not(.outlined) .border::after,
+.enabled:not(.outlined) .input:invalid ~ .border,
+.enabled:not(.outlined) .input:invalid ~ .border::after {
+	background-color: var(--ui-error);
+}
+.enabled:not(.outlined) .input:focus ~ .border::after {
+	transition: transform var(--ui-dpd-4) var(--ui-easing) 0ms;
+	transform: scaleX(1);
+}
+
+/* filled and outlined */
+.filled .border::before,
+.outlined .border::before {
+	content: "";
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+.filled .border::before {
+	height: calc(var(--ui-outer-h) - var(--input-border-distance) + var(--ui-lr));
+	border-radius: var(--ui-border-radius-emphasized) var(--ui-border-radius-emphasized) 0 0;
+	background: var(--input-fill);
+}
+.outlined .border::before {
+	height: var(--ui-wrap-h);
+	border-radius: var(--ui-border-radius-emphasized);
+	border: var(--ui-border-width) solid var(--ui-outline);
+}
+.outlined .input:focus ~ .border::before {
+	border-width: var(--ui-border-width-emphasized);
+}
+
+.root:not(.responsive):not(.number)::after,
+.root:not(.responsive):not(.number) .wrapper {
+	width: var(--ui-default-input-width);
+}
+
+.outlined.invalid .border::before,
+.outlined.enabled .input:invalid ~ .border::before {
+	border-color: var(--ui-error);
+}
+
+
+.wrapper > label {
+	position: absolute;
+	display: inline-block;
+	top: calc(var(--ui-t) + var(--padding-top));
+	left: 0;
+	padding: 0;
+	margin-bottom: 0;
+	cursor: pointer;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 100%;
+	overflow: hidden;
+	transform: scale(1, 1);
+	color: var(--input-text-muted);
+	background-color: transparent;
+	transform-origin: top left;
+	transition-property: transform, top, color, background-color;
+	transition-duration: var(--ui-dpd-0);
+	transition-timing-function: var(--ui-easing);
+}
+/* sliding labels */
+.hasSchema.slideLabel .input:not(:focus):placeholder-shown ~ label {
+	transform: scale(1, 1);
+}
+.root.staticLabel .wrapper:not(.largeUI) > label,
+.root.slideLabel .wrapper:not(.largeUI) .input:focus ~ label,
+.root.slideLabel .wrapper:not(.largeUI) .input:not(:placeholder-shown) ~ label {
+	transform: scale(var(--small-size), var(--small-size));
+	top: calc(var(--ui-t) - (var(--margin-bottom) * var(--small-size)));
+}
+
+/* TODO specials ... */
+.defaultUI .input, .defaultUI .prefix, .defaultUI .suffix,
+.mediumUI .input, .mediumUI .prefix, .mediumUI .suffix {
+	top: calc(var(--ui-border-width) * -1);
+}
+.defaultUI + .helperText {
+	padding-top: 0;
+	margin-top: calc(var(--padding-top) * -1);
+	margin-bottom: calc(var(--margin-bottom) + (var(--padding-top) * 2));
+}
+.root.staticLabel .largeUI > label,
+.root.slideLabel .largeUI .input:focus ~ label,
+.root.slideLabel .largeUI .input:not(:placeholder-shown) ~ label {
+	top: 0px;
+}
+/* <-- */
+
+.outlined.staticLabel .wrapper > label,
+.outlined.slideLabel .input:focus ~ label,
+.outlined.slideLabel .input:not(:placeholder-shown) ~ label {
+	background: var(--root-bg);
+}
+
+.root.filled .wrapper > label,
+.root.filled input.input,
+.root.filled textarea.input,
+.root.outlined .wrapper > label,
+.root.outlined input.input,
+.root.outlined textarea.input {
+	margin-left: var(--ui-l);
+	padding-left: 4px;
+	padding-right: 4px;
+}
+/*
+.root .prefix ~ label {
+	left: var(--touch-target-min);
+}
+*/
+.hasSchema .input:focus ~ label {
+	color: var(--ui-bg);
+}
+.parentSchema .input:focus ~ label {
+	color: var(--ui-accent);
+}
+.invalid .input:focus ~ label,
+.wrapper .input:invalid:focus ~ label {
+	color: var(--ui-error);
+}
+
+.root.slideLabel .input::placeholder,
+.root.slideLabel .prefix,
+.root.slideLabel .suffix {
+	transition: opacity var(--ui-dpd-1) var(--ui-easing);
+	opacity: 0;
+}
+.root.slideLabel .input:focus::placeholder,
+.root.slideLabel .input:focus ~ .prefix,
+.root.slideLabel .input:focus ~ .suffix,
+.root.slideLabel .input:not(:placeholder-shown) ~ .prefix,
+.root.slideLabel .input:not(:placeholder-shown) ~ .suffix {
+	opacity: 1;
+}
+
+.disabled .input:not(:invalid) ~ .border {
+	background-color: var(--root-disabled) !important;
+}
+.disabled label {
+	color: var(--root-disabled) !important;
+}
+/*
+.disabled .input,
+.readonly .input,
+.disabled .addon,
+.readonly .addon {
+	background-color: var(--ui-disabled);
+}*/
+.focused { }
+.required { }
+.valid { }
+
+
+
+/* TODO !!! FIXME :
+.root.smallUI.staticLabel label {
+	padding-top: 0;
+}
+.root:not(.smallUI) .prefix,
+.root:not(.smallUI) .suffix {
+	padding-top: calc(var(--wrap  per-max-b) + var(--padding-top));
+	padding-bottom: 0px;
+}
+.root.smallUI .prefix,
+.root.smallUI .suffix {
+	padding-top: var(--padding-top);
+	padding-bottom: 0px;
+}
+ */
+/* <-- */

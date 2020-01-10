@@ -1,0 +1,207 @@
+:root {
+	--redaktor-btn-min-w: calc(var(--grid-base) * 20);
+}
+html {
+	/* mouse position aware w. JS, noscript fallback : */
+	--redaktor-btn-w: var(--redaktor-btn-min-w);
+	--redaktor-btn-x: 50%;
+	--redaktor-btn-y: 50%;
+}
+button.root {
+	background: none;
+}
+.wrapper { composes: wrapper from './_ui.m.css'; }
+.inner { composes: inner from './_ui.m.css'; }
+.prefix { composes: prefix from './_ui.m.css'; }
+.hasPrefix { composes: hasPrefix from './_ui.m.css'; }
+.suffix { composes: suffix from './_ui.m.css'; }
+.hasSuffix { composes: hasSuffix from './_ui.m.css'; }
+.square { composes: square from './_ui.m.css'; }
+.responsive { composes: responsive from './_ui.m.css'; }
+.shaped { }
+
+.root {
+	composes: ui-border ui-transition from './_ui.m.css';
+	--button-pulse: var(--ui-accent);
+	position: relative;
+	color: var(--text);
+	border-radius: var(--ui-border-radius-emphasized);
+	cursor: pointer;
+}
+.root:not(.outlined):not(.flat),
+.root.filled {
+	background-color: var(--ui-bg);
+}
+.root.outlined {
+	border: none;
+}
+.root.outlined .animation {
+	border: var(--ui-border-width) solid var(--ui-border);
+}
+.root.flat {
+	--button-flat-hover: var(--ui-flat);
+	--button-pulse: var(--ui-flat-accent);
+	color: var(--ui-border);
+	background: none;
+}
+.root.wide {
+	min-width: var(--redaktor-btn-min-w);
+}
+
+.root.wrapper {
+	padding: 0;
+	height: var(--ui-wrap-h);
+	margin-top: calc(var(--ui-t) * -1);
+	margin-bottom: calc(var(--ui-outer-h) - var(--ui-wrap-h) + var(--ui-t));
+}
+.root .inner {
+	text-transform: uppercase;
+	height: 100%;
+	padding-left: var(--ui-lr-content);
+	padding-right: var(--ui-lr-content);
+	margin: 0;
+}
+
+.root .suffix {
+	margin: 0;
+	transition: border var(--ui-dpd-6) var(--ui-easing);
+}
+.root .suffix::before {
+	content: "";
+	position: absolute;
+	top: 0px;
+	margin-left: calc(var(--spacing) * -1);
+	height: 100%;
+	width: var(--ui-border-width);
+	background: var(--ui-border);
+}
+/* depth: raised and flat depth */
+.root.raised, .root.flat {
+	border-color: transparent;
+}
+.raised {
+	box-shadow: var(--ui-dp-2);
+}
+/* states */
+.enabled.parentSchema:hover,
+.enabled:focus {
+	border-color: var(--ui-hover-border);
+	outline: none;
+}
+.enabled.parentSchema.defaultDepth:hover .addon,
+.enabled.parentSchema.defaultDepth:focus .addon {
+	border-left-color: var(--ui-accent);
+}
+
+
+.enabled:not(.parentSchema).flat:hover,
+.enabled:not(.parentSchema).flat:focus {
+	background-color: var(--ui-flat);
+}
+.enabled:not(.outlined):not(.flat):hover,
+.enabled:not(.outlined):not(.flat):focus {
+	/*color: var(--text-selected);*/
+	background-color: var(--ui-hover);
+}
+.enabled.outlined:hover .animation,
+.enabled.outlined:focus .animation {
+	border-color: var(--ui-hover-border);
+}
+
+.enabled.raised::after {
+	content: "";
+	position: absolute;
+	display: block;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: opacity var(--ui-dpd-6) var(--ui-easing);
+	background-color: transparent;
+	box-shadow: var(--ui-dp-8);
+	z-index: -1;
+}
+.raised:active {
+	box-shadow: none;
+}
+.raised:active::after {
+	opacity: 1;
+}
+
+.toggle { }
+.pressed {
+	background-color: var(--ui-accent);
+	/* color: ... */
+}
+.parentSchema .pressed {
+	border-color: var(--ui-accent);
+}
+
+/* schema: primary and secondary color schemes */
+.enabled.parentSchema.flat {
+	color: var(--text);
+}
+.enabled:not(.parentSchema).flat {
+	color: var(--ui-accent);
+}
+.disabled,
+.disabled:hover {
+	box-shadow: none;
+	color: var(--text-disabled);
+	cursor: default;
+}
+.disabled.filled,
+.disabled:not(.flat):not(.filled):not(.outlined),
+.disabled:not(.flat):not(.filled):not(.outlined):hover {
+	background-color: var(--ui-disabled);
+}
+
+/* onClick: animation */
+.animation {
+	composes: absolute from './_ui.m.css';
+	width: 100%;
+	height: 100%;
+  outline: none;
+	overflow: hidden;
+	border-radius: var(--ui-border-radius-emphasized);
+}
+@keyframes pulse {
+	0%   { opacity: 0; box-shadow: 0 0 0 1px var(--button-pulse); }
+	40%  { opacity: 0.8; }
+	80%	 { box-shadow: 0 0 0 var(--redaktor-btn-w) var(--button-pulse); }
+	100% { opacity: 0; box-shadow: 0 0 0 0px var(--button-pulse); }
+}
+
+.root .animation::after {
+	content: "";
+	position: absolute;
+	display: block;
+	left: 0;
+	top: 0;
+	width: 100%;
+  height: 100%;
+	box-shadow: 0 0 0 0px var(--ui-border);
+	border-radius: var(--ui-wrap-h);
+	z-index: 1;
+	transform: perspective(1px) translate(0, 0);
+}
+.root .animation:focus::after {
+	width: 4px;
+	height: 4px;
+	left: calc(var(--redaktor-btn-x) - 2px);
+	top: var(--redaktor-btn-y);
+  animation-name: pulse;
+  animation-duration: var(--ui-dpd-animation);
+  animation-timing-function: var(--ui-easing);
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+	z-index: -1;
+}
+.root.flat .animation:focus::after {
+	box-shadow: 0 0 0 1px var(--ui-highlight-flat);
+	background-color: var(--ui-flat);
+}

@@ -1,0 +1,234 @@
+.root,
+.root *,
+.root *::before,
+.root *::after {
+	box-sizing: border-box;
+}
+
+.root {
+	border: var(--ui-border-width) solid var(--ui-border);
+	display: inline-block;
+	margin: 0 calc(var(--line) * 2);
+	position: relative;
+	width: calc(100% - var(--line) * 4);
+	min-width: 240px;
+}
+
+.dateGrid {
+	width: 100%;
+}
+
+/* Date grid */
+.weekday, .date {
+	text-align: center;
+	width: 14.28%;
+}
+
+.weekday {
+	composes: ui-typo ui-box from './_ui.m.css';
+	padding-left: 1px;
+	padding-right: 1px;
+	background-color: var(--ui-menu);
+	border-bottom: var(--ui-border-width) solid var(--ui-border);
+	color: var(--text-muted);
+	font-weight: normal;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.weekday abbr {
+	text-decoration: none;
+}
+
+.date {
+	composes: ui-typo ui-box from './_ui.m.css';
+	padding-left: 1px;
+	padding-right: 1px;
+	color: var(--text-muted);
+	cursor: pointer;
+	font-weight: bold;
+	border: var(--ui-border-width) solid transparent;
+	transition: all var(--ui-dpd-1) var(--ui-easing);
+}
+
+.todayDate {
+	background-color: var(--ui-menu);
+}
+
+.date:focus,
+.date:hover {
+	color: var(--ui-focus);
+	border: var(--ui-border-width) solid var(--ui-border);
+}
+
+.inactiveDate {
+	font-weight: normal;
+	color: var(--text-disabled);
+}
+
+.selectedDate {
+	background-color: var(--bg);
+	color: var(--text-inverted);
+}
+
+.selectedDate:focus,
+.selectedDate:hover {
+	background-color: var(--ui-full);
+	color: var(--ui-focus);
+	border: var(--ui-border-width) solid var(--ui-focus);
+}
+
+/* Date picker  */
+.topMatter {
+	display: flex;
+	align-items: flex-start;
+	background: var(--ui-menu);
+	border-bottom: var(--ui-border-width) solid var(--ui-border);
+}
+
+.monthTrigger,
+.yearTrigger,
+.previous,
+.next {
+	background: 0;
+	border: var(--ui-border-width) solid transparent;
+	color: inherit;
+	cursor: pointer;
+	outline: none;
+	transition: border-color var(--ui-dpd-1) var(--ui-easing);
+}
+
+.monthTrigger:focus,
+.monthTrigger:hover,
+.yearTrigger:focus,
+.yearTrigger:hover,
+.previous:focus,
+.previous:hover,
+.next:focus,
+.next:hover {
+	border-color: var(--ui-focus);
+}
+
+.monthTrigger,
+.yearTrigger {
+	composes: ui-typo-meta ui-box from './_ui.m.css';
+	color: var(--text);
+	flex: 0;
+}
+
+.monthTriggerActive,
+.yearTriggerActive {
+	border-color: transparent;
+	border-bottom-color: var(--bg);
+	color: var(--ui-focus);
+}
+
+.previous,
+.next {
+	background-color: var(--ui-menu);
+	border: var(--ui-border-width) solid var(--ui-border);
+	color: var(--text);
+	display: block;
+	font-size: initial;
+	line-height: 1;
+	padding: var(--line) 0;
+	position: absolute;
+	top: 50%;
+	width: calc(var(--line) * 2);
+}
+/*
+.previous i,
+.next i {
+	position: relative;
+	left: calc((var(--spacing-large) - var(--font-size-icon)) / 2);
+}
+*/
+.previous {
+	left: 0;
+	transform: translate(-100%, calc(var(--line) * -1));
+}
+
+.next {
+	right: 0;
+	transform: translate(100%, calc(var(--line) * -1));
+}
+
+.monthGrid,
+.yearGrid {
+	position: relative;
+	background-color: var(--ui-full);
+}
+
+.monthFields,
+.yearFields {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.monthRadio,
+.yearRadio {
+	display: block;
+	float: left;
+	position: relative;
+	text-align: center;
+	text-transform: capitalize;
+}
+
+.monthRadio {
+	width: 33.33%;
+}
+
+.yearRadio {
+	width: 20%;
+}
+
+.monthRadioLabel,
+.yearRadioLabel {
+	border: var(--ui-border-width) solid transparent;
+	cursor: pointer;
+	display: block;
+	text-decoration: none;
+	padding: var(--grid-base);
+	transition: all var(--ui-dpd-1) var(--ui-easing);
+}
+
+
+.monthRadioChecked .monthRadioLabel,
+.yearRadioChecked .yearRadioLabel {
+	background-color: var(--bg);
+	color: var(--text-inverted);
+}
+
+.monthRadioInput,
+.yearRadioInput {
+	appearance: none;
+	height: 100%;
+	left: 0;
+	margin: 0;
+	outline: none;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	background: transparent;
+	border: none;
+	border-radius: 0;
+}
+
+.monthRadio:hover .monthRadioLabel,
+.yearRadio:hover .yearRadioLabel {
+	color: var(--ui-focus);
+	border: var(--ui-border-width) solid var(--ui-border);
+}
+
+.monthRadioChecked:hover .monthRadioLabel,
+.yearRadioChecked:hover .yearRadioLabel,
+.monthRadioInput:focus ~ .monthRadioLabel,
+.yearRadioInput:focus ~ .yearRadioLabel {
+	background-color: var(--ui-full);
+	color: var(--ui-focus);
+	border: var(--ui-border-width) solid var(--bg);
+}
+
+.controls { }
+.datePicker { }

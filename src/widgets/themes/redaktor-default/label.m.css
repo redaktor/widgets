@@ -1,0 +1,48 @@
+.prefix { composes: prefix from './_ui.m.css'; }
+.suffix { composes: suffix from './_ui.m.css'; }
+.hasPrefix { composes: hasPrefix from './_ui.m.css'; }
+.hasSuffix { composes: hasSuffix from './_ui.m.css'; }
+.smallTypo { composes: smallTypo from './_ui.m.css'; }
+.smallUI { composes: smallUI from './_ui.m.css'; }
+.defaultTypo { composes: defaultTypo from './_ui.m.css'; }
+.defaultUI { composes: defaultUI from './_ui.m.css'; }
+.mediumTypo { composes: mediumTypo from './_ui.m.css'; }
+.mediumUI { composes: mediumUI from './_ui.m.css'; }
+.largeTypo { composes: largeTypo from './_ui.m.css'; }
+.largeUI { composes: largeUI from './_ui.m.css'; }
+.strongTypo { composes: strongTypo from './_ui.m.css'; }
+.material { composes: material from './_ui.m.css'; }
+.responsive { composes: responsive from './_ui.m.css'; }
+.enabled { composes: enabled from './_ui.m.css'; }
+.disabled { composes: disabled from './_ui.m.css'; }
+.readonly { composes: readonly from './_ui.m.css'; }
+.invalid { composes: invalid from './_ui.m.css'; }
+.valid { composes: valid from './_ui.m.css'; }
+.focused { composes: focused from './_ui.m.css'; }
+.required { composes: required from './_ui.m.css'; }
+
+.root {
+	display: inline-flex;
+	color: var(--text);
+	transition: color var(--ui-dpd-1) var(--ui-easing),
+	transform var(--ui-dpd-1) var(--ui-easing);
+	z-index: 2;
+}
+
+.root.primary, .root.secondary {
+	color: var(--ui-bg);
+}
+.muted {
+	color: var(--text-muted);
+}
+/*
+	Prevent visibility of selection for 2 fast ui clicks [aka doubleclick],
+	e.g. fast toggle, checkbox etc. TODO
+*/
+.root::selection {
+	background-color: transparent;
+}
+.required::after {
+	content: '*';
+	color: var(--ui-error);
+}

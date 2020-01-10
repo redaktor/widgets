@@ -1,0 +1,23 @@
+@import './text-input.m.css';
+.inputWrapper {
+  min-width: calc(var(--grid-base) * 20);
+  width: auto;
+}
+.root .input {
+	flex: 1 1 auto;
+}
+.root { }
+.enabled { }
+.disabled { }
+.primary { }
+.secondary { }
+.small { }
+.medium { }
+.large { }
+.invalid { }
+.valid { }
+.readonly { }
+.required { }
+.focused { }
+.border { }
+.parentSchema { }

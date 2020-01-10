@@ -1,0 +1,1 @@
+{"version":3,"file":"isFlattenable.js","sourceRoot":"","sources":["../../../../src/API/base/lang/isFlattenable.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA,mCAA8B;IAC9B,SAAwB,aAAa,CAAC,CAAM;QAC1C,OAAO,KAAK,CAAC,OAAO,CAAC,CAAC,CAAC,IAAI,gBAAM,CAAC,CAAC,CAAC;YACpC,CAAC,CAAC,CAAC,MAAM,CAAC,kBAAkB,IAAI,CAAC,IAAI,CAAC,CAAC,MAAM,CAAC,kBAAkB,CAAC,CAAC,CAAA;IACpE,CAAC;IAHD,gCAGC"}

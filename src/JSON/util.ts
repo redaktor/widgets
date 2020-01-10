@@ -1,0 +1,50 @@
+import { lang } from '../dojo/core/main';
+/* TODO - i18n error messages */
+export function jsonObject(o: any) {
+  let s = (typeof o === 'string') ? o.replace(/[^\x20-\x7E]/gmi,'') : JSON.stringify(o);
+  let safeO: any;
+  try {
+  	safeO = JSON.parse(s);
+  } catch (e) {
+  	try { safeO = JSON.parse(JSON.stringify(eval('('+o+')'))); } catch(e) { safeO = void 0; }
+  }
+	return (typeof safeO === 'object') ? safeO : {};
+}
+export function checkJSON(o: any, _path = '/') {
+	const jsonO = jsonObject(o);
+	var JSONtypes = ['boolean', 'string', 'number', 'object'];
+  return Object.keys(jsonO).reduce((result, key, index) => {
+    if (jsonO.hasOwnProperty(key) && jsonO[key] === o[key]) {
+    	return result;
+    }
+    const isJSONtype = (o[key] === null ||
+    	(JSONtypes.indexOf(typeof o[key]) > -1) || Array.isArray(o[key]));
+    const isPrimitive = (typeof o[key] !== 'object');
+    const eSuffix = (isPrimitive) ? 'is not valid.' : 'contained invalid values.';
+    return result.concat([{
+      path: (_path + key),
+      primitive: isPrimitive,
+      error: (!isJSONtype) ? `${typeof o[key]} is not a valid type.` :
+      	`${typeof o[key]} ${eSuffix}`,
+      value: o[key]
+    }]);
+  }, []);
+}
+export function jsonObjectWithErrors(o: any, path = '/') {
+  let errArr = checkJSON(o, path);
+	const jsonO = jsonObject(o);
+  console.log('...:',errArr)
+  /*
+  errArr.forEach((errO) => {
+  	if (!errO.primitive) {
+      if (typeof jsonO === 'object') {
+      	if (!errO.errors) { errO.errors = []; }
+        const newErrors = jsonObjectWithErrors(errO.value, errO.path + '/');
+        errO.errors.push(newErrors);
+        errArr = errArr.map((aO) => { return (errO.path === aO.path) ? errO : aO; });
+      }
+    }
+  });
+  */
+  return jsonO; //{value: jsonO, errors: errArr};
+};

@@ -1,0 +1,26 @@
+ /*
+  const background-color-default =
+    theme.palette.type === light ? theme.palette.grey[100] : theme.palette.grey[900];
+*/
+.root, .root * { box-sizing: border-box; }
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-shadow: var(--ui-dp-4);
+  /*z-index: theme.z-index.app-bar; TODO FIXME */
+  background-color: var(--ui-menu);
+  flex-shrink: 0;
+  top: 0;
+  left: auto;
+  right: 0;
+}
+.smallTypo, .defaultTypo, .mediumTypo, .largeTypo, .strongTypo,
+.smallUI, .defaultUI, .mediumUI, .largeUI, .responsive, .focused,
+.primary, .secondary, .parentSchema, .staticLabel, .slideLabel, .noLabel { }
+
+/* TODO - should be fixedCSS */
+.fixed { position: fixed; }
+.absolute { position: absolute; }
+.sticky { position: sticky; }
+.static { position: static; }

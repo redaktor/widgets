@@ -1,0 +1,1 @@
+{"version":3,"file":"isPrototype.js","sourceRoot":"","sources":["../../../../src/API/base/lang/isPrototype.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA,SAAwB,WAAW,CAAC,CAAM;QACxC,IAAM,EAAE,GAAG,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,WAAW,CAAC;QAChC,OAAO,CAAC,KAAK,CAAC,CAAC,OAAO,EAAE,KAAK,UAAU,IAAI,EAAE,CAAC,SAAS,CAAC,IAAI,MAAM,CAAC,SAAS,CAAC,CAAA;IAC/E,CAAC;IAHD,8BAGC"}

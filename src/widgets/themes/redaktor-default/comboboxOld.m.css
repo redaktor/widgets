@@ -1,0 +1,153 @@
+.root, .root *, .root *::before, .root *::after { box-sizing: border-box; }
+.root {
+	--combo-selected: var(--text-selected);
+}
+.root:focus,
+.root:focus-within,
+.root.focused {
+	z-index: var(--zindex-dropdown);
+}
+
+.primary { composes: primary from './_ui.m.css'; }
+.secondary { composes: secondary from './_ui.m.css'; }
+
+.controls {
+	position: relative;
+}
+.root label {
+	left: 0px !important;
+}
+.inputWrapper { }
+.input { }
+.clearable { }
+
+.clear, .trigger {
+	background: none;
+	outline: none;
+	overflow: hidden;
+	color: inherit;
+}
+.enabled .clear,
+.enabled .trigger {
+	cursor: pointer;
+}
+
+.clear:hover,
+.trigger:hover {
+	color: var(--combo-selected);
+}
+
+
+.parentSchema .clear:hover,
+.parentSchema .trigger:hover {
+	border-color: var(--ui-accent);
+}
+
+.parentSchema .clear:active span,
+.parentSchema .clear:focus span,
+.parentSchema .trigger:active span,
+.parentSchema .trigger:focus span {
+	font-weight: bold;
+	color: var(--ui-focus);
+}
+.primary .clear:active span, .secondary .clear:active span,
+.primary .clear:focus span, .secondary .clear:focus span,
+.primary .trigger:active span, .secondary .trigger:active span,
+.primary .trigger:focus span, .secondary .trigger:focus span {
+	font-weight: bold;
+	color: var(--ui-bg);
+}
+
+.primary .clear, .secondary .clear {
+	height: auto;
+	padding-left: 0px;
+	text-align: left;
+}
+.primary .trigger, .secondary .trigger {
+	height: auto;
+	padding-right: 0px;
+	text-align: right;
+}
+
+
+.root .dropdown {
+	margin: 0;
+	padding: 0;
+	/*background-color: var(--ui-full);*/
+	border-bottom-left-radius: var(--ui-border-radius);
+	border-bottom-right-radius: var(--ui-border-radius);
+	position: absolute;
+	width: 100%;
+	top: 100%;
+	overflow-y: auto;
+	transform: translateZ(0);
+}
+
+.root:not(:focus-within) .dropdown,
+/*.root input:not(:focus) ~ .dropdown,*/
+.root:not(.focused) input:not(:focus) ~ .dropdown {
+	visibility: hidden;
+	max-height: 0px;
+	transition: visibility 1ms ease var(--ui-dpd-4), max-height 1ms ease var(--ui-dpd-4);
+}
+
+.root:focus-within .dropdown,
+.root input:focus ~ .dropdown,
+.root.focused .dropdown {
+	transition: visibility 1ms ease, max-height 1ms ease;
+	visibility: visible;
+	max-height: 200px;
+	max-height: calc(var(--line) * 10);
+}
+.root .dropdown ul {
+	transform-origin: center top;
+	transition: transform var(--ui-dpd-4), box-shadow var(--ui-dpd-4);
+	-webkit-transform-style: preserve-3d;
+}
+.root:not(:focus-within) .dropdown ul,
+.root:not(.focused) .dropdown ul {
+	transform: translateY(-100%);
+}
+.root:focus-within .dropdown ul,
+.root.focused .dropdown ul {
+	transform: translateY(0);
+	transition: transform var(--ui-dpd-4), box-shadow var(--ui-dpd-4);
+}
+
+
+/*
+.dropdown li {
+  position: relative;
+  -webkit-transform: translate3d(0, -10px, 0);
+          transform: translate3d(0, -10px, 0);
+  opacity: 0;
+}
+.dropdown.open {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.dropdown.open li {
+  transition: all 350ms cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+*/
+
+.invalid .trigger {
+	/*border-left-color: color(var(--ui-error) saturation(-9%) lightness(+37%));*/
+	color: var(--ui-error);
+}
+.valid .trigger {
+	/*border-left-color: color(var(--ui-success) saturation(-32%) lightness(+55%));*/
+	color: var(--ui-success);
+}
+
+.disabled { }
+.readonly { }
+.required { }
+.focused { }
+.border { }
+.primary { }
+.secondary { }
+.parentSchema { }

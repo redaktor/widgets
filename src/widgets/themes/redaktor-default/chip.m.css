@@ -1,0 +1,63 @@
+@import './button.m.css';
+.root {
+	/* height */
+	display: inline-flex;
+  align-items: center;
+  justify-content: center;
+	border-radius: var(--line2);
+	white-space: nowrap;
+	/*transition: theme.transitions.create([background-color; box-shadow]);*/
+	cursor: default;
+	outline: none;
+	text-decoration: none;
+	border: none;
+	padding: 0;
+}
+
+.clickable {
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+}
+.clickable:hover, .clickable:focus {
+	/*background-color: emphasize(background-color; 0.08);*/
+}
+.clickable:active {
+	box-shadow: var(--ui-dp-1);
+	/*background-color: emphasize(background-color; 0.12);*/
+}
+.deletable { }
+.deletable:focus {
+	/*background-color: emphasize(background-color; 0.08);*/
+}
+.avatar {
+	margin-right: -4px;
+	/*
+	width: height;
+	height;
+	*/
+	color: var(--ui-on-flat);
+	/*font-size: theme.typography.px-to-rem(16);*/
+}
+.avatar-children {
+	width: 19px;
+	height: 19px;
+}
+.delete-icon {
+	-webkit-tap-highlight-color: transparent;
+	color: delete-icon-color;
+	cursor: pointer;
+	height: auto;
+	margin: 0 4px 0 -8px;
+}
+.delete-icon:hover {
+	/*color: fade(delete-icon-color; 0.4);*/
+}
+.root label {
+	display: flex;
+	align-items: center;
+	padding-left: 12px;
+	padding-right: 12px;
+	user-select: none;
+	white-space: nowrap;
+	cursor: inherit;
+}

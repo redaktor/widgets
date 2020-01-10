@@ -1,0 +1,303 @@
+
+/*--------------------------------------------------------------
+  Typography
+--------------------------------------------------------------*/
+/* 1.067 rythm for "Merriweather": 12px / 1.3333333333333333 */
+/*@import url('https://fonts.googleapis.com/css?family=Merriweather:300,300i,700|Maven+Pro:400,500,900');*/
+/* TYPO examples
+// https://codepen.io/sebilasse/pen/BdaPzN?editors=1010
+Maven Pro / Georgia               https://codepen.io/sebilasse/full/oENGev
+Merriweather Sans / Merriweather  https://codepen.io/sebilasse/pen/ddopBj
+*/
+
+:root {
+  --import-webfonts 	: true;
+  --font-name-sans    : 'Maven+Pro';
+  --font-name-serif   : 'Merriweather';
+  --font-variant-sans : '400,500,400i';
+  --font-variant-serif: '300,700,300i';
+
+  --font-sans         : 'Maven Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  --font-serif        : 'Merriweather', Georgia, 'Palatino', 'Palatino Linotype', 'Book Antiqua', serif;
+  --font-icon         : 'dojo2BaseTheme';
+
+  --google-Subset     : 'latin';
+  --google-Protocol   : 'https://';
+/*
+	--base-size					: 12px;
+	--large-size 				: 14px;
+	--article-size 			: 18px;
+
+	--base-line					: 1.3333333333333333;
+	--large-line 				: 1.5714285714285714;
+	--article-line 			: 1.5714285714285714;
+*/
+  --font-weight-selected : 700;
+  --base-line-start		   : -1px;
+
+  /* derived, do not touch */
+  --lines-below: 1;
+  --padding-top: calc(1em * (var(--line-h) - var(--cap-h)) / 2);
+  --margin-bottom: calc((var(--line) * var(--lines-below)) - var(--padding-top));
+}
+:root {
+  --small-size: 0.8333333333333333;
+  --small-running-size: 1;
+/* FIXME TODO 1.5rem / 1.3333333333333333; */
+}
+
+html, .running {
+  /* do not touch */
+  --line: calc(var(--base-size) * var(--base-line));
+  --line2: calc(var(--line) * 2);
+  --line3: calc(var(--line) * 3);
+  --line4: calc(var(--line) * 4);
+  --line5: calc(var(--line) * 5);
+  --lineHalf: calc(var(--line) / 2);
+  font-size: var(--base-size);
+  line-height: var(--base-line);
+  color: var(--color);
+  box-sizing: border-box;
+}
+body {
+  height: 100%;
+  font-family: var(--font-serif, serif);
+  font-size: 1em;
+  font-weight: normal;
+  font-display: optional;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-feature-settings: 'kern' 1,'onum' 1,'liga' 1;
+  text-rendering: optimizeLegibility;
+  background-clip: content-box;
+  border: rgb(248, 244, 243) solid var(--line);
+  border-image: none 1 stretch 100% 0;
+}
+@supports (font-variant-ligatures: common-ligatures) {
+  body {
+    font-feature-settings: normal;
+    font-variant-ligatures: common-ligatures;
+  }
+}
+/*
+RESET THE BROWSER STYLES,
+only necessary here TODO FIXME
+*/
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+body, div, figure, section, small, p, h6, h5, h4, h3, h2, h1 {
+  margin: 0;
+  padding: 0;
+}
+
+/*--------------------------------------------------------------
+Typography
+--------------------------------------------------------------*/
+.serif, p, .p {
+  font-family: var(--font-serif);
+}
+.sans, h6, h5, h4, h3, h2, h1, button, label, .input::placeholder {
+  font-family: var(--font-sans);
+}
+/* RYTHM AND SIZE */
+html {
+  --color: rgba(0, 0, 0, 0.87);
+  --base-size: 12px;
+  --base-line: 1.333333333333333;
+}
+/* CHROME Subpixel rendering
+https://johnresig.com/blog/sub-pixel-problems-in-css/
+http://cruft.io/posts/percentage-calculations-in-ie/
+*/
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
+  html {
+    --base-line: 1.3334;
+  }
+}
+
+.running {
+  --color: rgba(0, 0, 0, 0.87);
+  --base-size: 14px;
+  --base-line: 1.5714285714285714;
+}
+
+/* 9px */
+h6, .h6 {
+  letter-spacing: 0.15px;
+}
+small, .small-typo, h6, .h6 {
+  --size: var(--small-size);
+  --cap-h: 0.7777777777777778;
+  --line-h: 1.6;
+  --lines-below: 1;
+}
+.running small, .running .small-typo, .running h6, .running .h6 {
+  --size: var(--small-running-size);
+  --cap-h: 0.7777777777777778;
+  --line-h: 1.2222222222222223;
+}
+small:not(* + small) {
+  --line-h: 0;
+  --lines-below: 0;
+}
+* + small {
+  display: inline-block;
+}
+/* 12px */
+:root:not(.running), p, .p, .input::placeholder {
+  --size: 1;
+  --cap-h: 0.75;
+  --line-h: 1.333333333333333;
+  --lines-below: 2;
+}
+.sans.p, .input::placeholder { --cap-h: 0.6666666666666666; }
+
+:root.running, .running p, .running .p {
+  --size: 1;
+  --cap-h: 0.7857142857142857;
+  --line-h: 1.5714285714285714;
+}
+.running .sans.p {
+  --cap-h: 0.7333333333333333;
+}
+/* 14px */
+h5, .h5 {
+  --size: 1.25;
+  --cap-h: 0.8;
+  --line-h: 1.0666666666666667;
+  --lines-below: 1;
+}
+h5, .sans.h5 { --cap-h: 0.7333333333333333; }
+.running h5, .running .h5 {
+  --size: 1.4285714285714286;
+  --cap-h: 0.8;
+  --line-h: 1.1;
+}
+.running h5, .running .sans.h5 { --cap-h: 0.7333333333333333; }
+/* 22px */
+h4, .h4 {
+  --size: 1.8333333333333333;
+  --cap-h: 0.7727272727272727;
+  --line-h: 1.4545454545454546;
+  --lines-below: 1;
+}
+h4, .sans.h4 { --cap-h: 0.7272727272727273; }
+.running h4, .running .h4 {
+  --size: 1.4285714285714286;
+  --cap-h: 0.8;
+  --line-h: 1.1;
+}
+.running h4, .running .sans.h4 { --cap-h: 0.7333333333333333; }
+/* 30px */
+h3, .h3 {
+  --size: 2.5;
+  --cap-h: 0.7666666666666667;
+  --line-h: 1.0666666666666667;
+  --lines-below: 1;
+}
+h3, .sans.h3 { --cap-h: 0.7; }
+.running h3, .running .h3 {
+  --size: 2;
+  --cap-h: 0.7857142857142857;
+  --line-h: 1.5714285714285714;
+}
+.running h3, .running .sans.h3 { --cap-h: 0.7083333333333334; }
+/* 41px */
+h2, .h2 {
+  letter-spacing: -0.333333px;
+  --size: 3.4166666666666665;
+  --cap-h: 0.7560975609756098;
+  --line-h: 1.170731707317073;
+  --lines-below: 2;
+}
+h2, .sans.h2 { --cap-h: 0.6829268292682927; }
+.running h2, .running .h2 {
+  --size: 2.857142857142857;
+  --cap-h: 0.775;
+  --line-h: 1.1;
+}
+.running h2, .running .sans.h2 { --cap-h: 0.6842105263157895; }
+/* 47px */
+h1, .h1 {
+  letter-spacing: -1.333333px;
+  --size: 3.9166666666666665;
+  --cap-h: 0.7659574468085106;
+  --line-h: 1.0212765957446808;
+  --lines-below: 2;
+}
+h1, .sans.h1 { --cap-h: 0.6808510638297872; }
+.running h1, .running .h1 {
+  --size: 4;
+  --cap-h: 0.7678571428571429;
+  --line-h: 1.1785714285714286;
+}
+.running h1, .running .sans.h1 { --cap-h: 0.6774193548387096; }
+
+small, .small-typo, p:not(.sans) {
+  --font-weight: 300;
+}
+h2, h3, h4, p.sans,
+.h2, .h3, .h4, .p.sans {
+  --font-weight: 400;
+}
+h1, h5, h6,
+.h1, .h5, .h6 {
+  --font-weight: 500;
+}
+
+.small-typo, .p, .h6, .h5, .h4, .h3, .h2, .h1, .input::placeholder,
+small, p, h6, h5, h4, h3, h2, h1 {
+  --padding-top: calc(1em * (var(--line-h) - var(--cap-h)) / 2);
+  /*--margin-bottom: calc((var(--line) * var(--lines-below, 1)) - var(--padding-top));*/
+  --margin-bottom: calc(var(--line) * 1 - 1em * (var(--line-h) - var(--cap-h)) / 2);
+
+  font-size: calc(var(--size) * var(--base-size));
+  font-weight: var(--font-weight);
+  line-height: var(--line-h);
+  padding-top: var(--padding-top);
+  margin-bottom: var(--margin-bottom);
+}
+.input::placeholder {
+  padding-top: 0;
+}
+
+b, strong {
+	font-weight: 700;
+}
+i, em, .italic {
+  font-style: italic;
+}
+
+p > i,
+p > em {
+  line-height: 0;
+}
+
+em,
+[class*="text shadow"] {
+  text-shadow: 0px 1px 2px rgba(34, 36, 38, 0.15);
+}
+
+.shadow:not([class*="subtle shadow"]) {
+  box-shadow: 0px 2px 4px 0px rgba(34, 36, 38, 0.12), 0px 2px 10px 0px rgba(34, 36, 38, 0.08);
+}
+
+[class*="subtle shadow"] {
+  box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
+}
+
+.header {
+  font-variant-numeric: lining-nums;
+}
+.running {
+  font-variant-numeric: oldstyle-nums;
+}
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+/*--------------------------------------------------------------
+Typo <---
+--------------------------------------------------------------*/

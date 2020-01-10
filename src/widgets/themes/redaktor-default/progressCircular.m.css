@@ -1,0 +1,92 @@
+.root, .root * { box-sizing: border-box; }
+
+.root {
+  display: inline-block;
+  /* margin-bottom: var(--line); */
+  margin-right: var(--line);
+  line-height: 1;
+  height: var(--ui-wrap-h);
+  width: var(--ui-wrap-h);
+	--slider-text: var(--text);
+	--ui-track-half-h: calc(var(--ui-track-h) / 2);
+}
+
+.smallTypo, .defaultTypo, .mediumTypo, .largeTypo, .strongTypo,
+.smallUI, .defaultUI, .mediumUI, .largeUI, .primary, .secondary, .parentSchema,
+.inner, .responsive, .disabled, .enabled, .focused {}
+.valid, .invalid, .labeled, .hasPrefix, .hasSuffix, .tickLabels, .tickMarks {}
+
+.output, .outputInline, .outputTooltip { }
+.outputNone { display: none; }
+.filled, .outlined, .shaped { }
+
+.root .prefix {
+	padding-right: calc(var(--ui-inner-h) / 2);
+}
+.root .suffix {
+	padding-left: calc(var(--ui-inner-h) / 2);
+}
+.root .wrapper {
+  color: var(--ui-accent);
+  margin: 0;
+}
+.svg {
+  font-size: calc((var(--ui-wrap-h) - var(--ui-track-h)) / 2);
+  width: var(--ui-wrap-h);
+  height: var(--ui-wrap-h);
+}
+
+.circle {
+  --radius: calc((var(--ui-wrap-h) - var(--ui-track-h)) / 2);
+  --circumference: calc(var(--radius) * 2 * var(--pi));
+  fill: none;
+  stroke-linecap: butt;
+  stroke-width: var(--ui-track-h);
+  vector-effect: non-scaling-stroke;
+  cx: calc(var(--ui-wrap-h) / 2);
+  cy: calc(var(--ui-wrap-h) / 2);
+  r: var(--radius);
+}
+/* Progress */
+.circle:not(.track) {
+  stroke: currentColor;
+}
+/* Track */
+.wrapper.parentSchema .circle.track {
+	stroke: var(--ui-track);
+}
+.wrapper:not(.parentSchema) .circle.track {
+	stroke: var(--ui-flat);
+}
+.indeterminate {
+  animation: circular-rotate 1.4s linear infinite;
+}
+
+.determinate .circle {
+  stroke-dasharray: var(--circumference);
+  transition: stroke-dashoffset 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+.indeterminate .circle {
+  animation: dash 1.4s ease-in-out infinite;
+  stroke-dasharray: calc(var(--ui-wrap-h) * 2.5), calc(var(--ui-wrap-h) * 5);
+  stroke-dashoffset: 0px;
+}
+@keyframes circular-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1px, calc(var(--ui-wrap-h) * 5);
+    stroke-dashoffset: 0px;
+  }
+  50% {
+    stroke-dasharray: calc(var(--ui-wrap-h) * 2.5), calc(var(--ui-wrap-h) * 5);
+    stroke-dashoffset: -15px;
+  }
+  100% {
+    stroke-dasharray: calc(var(--ui-wrap-h) * 2.5), calc(var(--ui-wrap-h) * 5);
+    stroke-dashoffset: -120px;
+  }
+}

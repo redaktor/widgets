@@ -1,0 +1,38 @@
+{
+	"version": "2.1.5",
+	"compilerOptions": {
+		"declaration": false,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"lib": [
+			"dom",
+			"es5",
+			"es2015.iterable",
+			"es2015.promise",
+			"es2015.symbol",
+			"es2015.symbol.wellknown",
+      "es2016"
+		],
+		"module": "umd",
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"downlevelIteration": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"outDir": "_build/",
+		"plugins": [
+			{
+				"name": "tslint-language-service",
+				"alwaysShowRuleFailuresAsWarnings": true
+			}
+		],
+		"removeComments": false,
+		"sourceMap": true,
+		"strictNullChecks": true,
+		"target": "es5",
+		"types": [ "intern" ]
+	},
+	"include": [
+		"./src/**/*.ts"
+	]
+}

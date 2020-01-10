@@ -1,0 +1,28 @@
+.root, .root * { box-sizing: border-box; }
+.root {
+  --badgeRadius: 12px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  position: absolute;
+  top: var(--badgeRadius);
+  right: var(--badgeRadius);
+  width: calc(var(--badgeRadius) * 2);
+  height: calc(var(--badgeRadius) * 2);
+  border-radius: 50%;
+  background-color: var(--bg);
+  color: var(--text);
+  z-index: 1; /* render the badge on top of potential pulse / ripples */
+  /* TODO parentNode :
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  */
+}
+
+.smallTypo, .defaultTypo, .mediumTypo, .largeTypo, .strongTypo,
+.smallUI, .defaultUI, .mediumUI, .largeUI, .responsive, .focused,
+.primary, .secondary, .parentSchema, .staticLabel, .slideLabel, .noLabel { }

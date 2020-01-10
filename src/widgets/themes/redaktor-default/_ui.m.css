@@ -1,0 +1,322 @@
+@import url("./_depth.css");
+@import url("./_typo.css");
+/*--------------------------------------------------------------
+  Globals
+--------------------------------------------------------------*/
+
+:root {
+	--pi: 3.14159265359;
+	--ui-font-weight       : 400;
+  --ui-font-weight-bold  : 700;
+	--ui-default-input-width: 270px; /* if neither responsive or width is given */
+	/* Border */
+	--ui-border-width: 1px;
+	--ui-border-width-emphasized: 2px;
+	--ui-border-radius: 2px;
+	--ui-border-radius-emphasized: 4px;
+  /* Spacing */
+	--grid-base: 8px;
+	--spacing: calc(var(--line) / 1.618);
+	--spacing-large: var(--line);
+	--touch-target-min: 40px;
+	/* Z-index levels */
+	--zindex-base: 0;
+	--zindex-tooltip: 100;
+	--zindex-dropdown: 200;
+	--zindex-fixed: 300;
+	--zindex-dialog: 400;
+	--zindex-alert: 500;
+
+  /*-------------------
+          Grid
+  --------------------*/
+  --columnCount: 16;
+
+  /*-------------------
+          Paths
+  --------------------*/
+  /* For source only. Deprecated. Were modified in gulp for dist FIXME*/
+  --imagePath : '../../themes/redaktor-default/assets/images';
+  --fontPath   : '../../themes/redaktor-default/assets/fonts';
+}
+.flex {
+	display: flex;
+	align-items: center;
+}
+.flexRow {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+}
+/* Dimensions */
+.smallUI { /* --wrapper-b: var(--lineHalf); Textarea TODO */
+	--ui-t: 0px;
+	--ui-l: var(--padding-top);
+	--ui-lr: 0px;
+	--ui-lr-content: 12px;
+	--ui-wrap-h: calc(var(--line) * 1.5);
+	--ui-inner-h: var(--line);
+	--ui-inner-b: 0px;
+	--ui-outer-h: var(--line2);
+	--ui-track-h: var(--ui-border-width-emphasized);
+	--check-scale: 1.2;
+}
+.defaultUI {
+	--ui-t: calc(var(--padding-top) * 2);
+	--ui-l: var(--lineHalf);
+	--ui-lr: var(--padding-top);
+	--ui-lr-content: 16px;
+	--ui-wrap-h: var(--line2);
+	--ui-inner-h: calc(var(--line) + var(--padding-top) * 2);
+	--ui-inner-b: var(--ui-t);
+	--ui-outer-h: var(--line3);
+	--ui-track-h: calc(var(--ui-border-width-emphasized) * 2);
+	--check-scale: 1.2;
+}
+.mediumUI {
+	--ui-t: var(--lineHalf);
+	--ui-l: calc(var(--line) / 1.618);
+	--ui-lr: var(--padding-top);
+	--ui-lr-content: 16px;
+	--ui-wrap-h: calc(var(--line) * 2.5);
+	--ui-inner-h: calc(var(--line) + var(--padding-top) * 4);
+	--ui-inner-b: 0px;
+	--ui-outer-h: var(--line4);
+	--ui-track-h: calc(var(--ui-inner-h) / 4);
+	--check-scale: 1.32;
+}
+.largeUI {
+	--ui-t: calc(var(--line) - var(--padding-top));
+	--ui-l: calc(var(--line) / 1.618);
+	--ui-lr: calc(var(--padding-top) * 2);
+	--ui-lr-content: 21px;
+	--ui-wrap-h: var(--line3);
+	--ui-inner-h: var(--line2);
+	--ui-inner-b: calc(var(--margin-bottom) - var(--line));
+	--ui-outer-h: var(--line4);
+	--ui-track-h: calc(var(--ui-inner-h) / 2);
+	--check-scale: 1.4;
+}
+
+/* Typo */
+.smallTypo {
+	composes: sans p from './_typo.css';
+}
+.defaultTypo,
+.mediumTypo,
+.largeTypo {
+	composes: sans h5 from './_typo.css';
+}
+/*.smallTypo,*/
+.strongTypo {
+	font-weight: var(--ui-font-weight-bold);
+}
+.muted {
+	color: var(--text-muted);
+}
+.accent {
+	color: var(--ui-accent);
+}
+.subtitle {
+	margin-top: calc(var(--line) * -1);
+}
+/* max. and min. bottom gap */
+.wide.spaced {
+  --top: calc((var(--line-h) - var(--cap-h)) / 2);
+  margin-bottom: calc(1em * (var(--line-h) - var(--top)));
+}
+.narrow.spaced {
+  --bottom: calc(var(--line) * var(--lines-below, 1));
+  margin-bottom: calc(var(--margin-bottom) - var(--bottom));
+}
+.helperText {
+	font-style: italic;
+}
+.invalid .helperText {
+	color: var(--ui-error);
+}
+.valid .helperText {
+	color: var(--ui-success);
+}
+
+/* Common ui classes */
+.running {}
+/*
+.root, .root *,
+.root::before, .root::after,
+.root *::before, .root *::after {
+	box-sizing: border-box;
+}
+*/
+.absolute, .absolute::before {
+	position: absolute;
+	display: block;
+	left: 0;
+	top: 0;
+}
+.absolute::before, .inner::before, .inner::after {
+	transition: transform var(--ui-dpd-1) var(--ui-easing);
+}
+.ui-border {
+  border: var(--ui-border-width) solid var(--ui-menu-border);
+}
+.ui-transition {
+	transition: all var(--ui-dpd-1) var(--ui-easing);
+	transform: translate3d(0, 0, 0);  /*force hardware acceleration in WebKit*/
+}
+
+.wrapper {
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	padding: 0 var(--ui-lr) 0 var(--ui-lr);
+}
+.wrapper:not(.responsive) {
+	display: inline-flex;
+	align-items: baseline;
+	/*margin-right: var(--line);*/ /* TODO */
+}
+.responsive.wrapper {
+	display: inline-flex;
+	align-items: baseline;
+	width: 100%;
+}
+.square, .circle {
+	display: inline-flex;
+	align-content: center;
+	text-align: center;
+	height: var(--ui-inner-h);
+	min-width: var(--ui-inner-h);
+}
+.circle {
+	border-radius: 50%;
+}
+.rectangle {
+	min-width: calc(var(--ui-inner-h) * 2);
+	height: var(--ui-inner-h);
+}
+
+.square.wrapper, .hasPrefix.wrapper { padding-left: 0; }
+.square.wrapper, .hasSuffix.wrapper { padding-right: 0; }
+.wrapper.hasPrefix .inner { padding-left: var(--ui-lr); }
+.wrapper.hasSuffix .inner { padding-right: var(--ui-lr); }
+
+.prefix,
+.suffix,
+.inner, {
+	height: 100%;
+	margin: 0;
+}
+.inner {
+	flex: 1;
+	position: relative;
+}
+.prefix,
+.suffix {
+	text-align: center;
+	min-width: var(--ui-inner-h);
+	padding-right: var(--spacing);
+	padding-left: var(--spacing);
+}
+
+.input {
+	composes: input from './_typo.css';
+	composes: absolute;
+	appearance: none;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	outline: none;
+	border: none;
+	border-radius: 0;
+	flex: 1 1 auto;
+	z-index: var(--zindex-fixed);
+}
+.inner::before, .inner::after {
+	position: absolute;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+
+.ui-box {
+	--t: calc(var(--line) + var(--padding-top) - var(--ui-border-width));
+	--b: calc(var(--line) - var(--padding-top) - var(--ui-border-width));
+	--lr: calc(var(--line) / 1.618);
+	padding: var(--t) var(--lr) var(--b) var(--lr);
+	margin: 0;
+}
+.debugBaseLine {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+  background: -webkit-linear-gradient(var(--color-baseline), var(--color-baseline) 1px, transparent 1px);
+  background: linear-gradient(var(--color-baseline), var(--color-baseline) 1px, transparent 1px);
+  background-size: 1px calc(1rem * var(--base-line));
+  background-position: 0px -1px;
+	z-index: 9999;
+	user-select: none;
+	pointer-events: none;
+}
+
+/* FIXME :: */
+.ui-input { /*text-input.m.css:48*/
+	--tb: calc(var(--line) - var(--padding-top));
+	--lr: calc(var(--line) / 1.618);
+	padding: var(--tb) var(--lr) var(--tb) var(--lr);
+	transition: all var(--ui-dpd-1) var(--ui-easing);
+	font-family: inherit;
+  font-size: inherit;
+	line-height: inherit;
+  min-width: calc(var(--grid-base) * 32);
+  width: 100%;
+	outline: 0;
+	border-radius: 0;
+}
+.ui-typo-wrapper { /*checkbox.m.css:82*/
+	display: block;
+	position: absolute;
+	top: var(--padding-top);
+	left: 0;
+}
+.ui-typo-wrapper::before {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	text-align: center;
+}
+.ui-typo-box { /*checkbox.m.css:66 - button.m.css:44*/
+	padding-top: var(--padding-top);
+	margin-bottom: var(--margin-bottom);
+}
+.ui-typo-box-large { /*button:48*/
+  composes: sans h5 from "./_typo.css";
+	--t: calc(var(--line) - var(--ui-border-width));
+	--b: calc(var(--line) - var(--padding-top) - var(--ui-border-width));
+	--lr: calc(var(--line) / 1.618);
+	margin-top: var(--padding-top);
+  margin-bottom: var(--line);
+	padding: var(--t) var(--lr) var(--b) var(--lr);
+}
+.ui-typo-meta {
+  composes: p from "./_typo.css";
+  color: var(--text-muted);
+}
+
+.ui-typo-small {
+  composes: sans small from "./_typo.css";
+	font-weight: var(--ui-font-weight);
+}
+.ui-typo {
+  composes: sans p from "./_typo.css";
+	font-weight: var(--ui-font-weight);
+}
+.ui-typo-large {
+  composes: sans h5 from "./_typo.css";
+	font-weight: var(--ui-font-weight);
+}
+/* TODO <-- */

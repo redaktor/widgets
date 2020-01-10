@@ -1,0 +1,3 @@
+.root {
+	composes: ui-border from './_ui.m.css';
+}

@@ -1,0 +1,303 @@
+.wrapper { composes: wrapper from './_ui.m.css'; }
+.input { composes: input from './_ui.m.css'; }
+.prefix { composes: prefix from './_ui.m.css'; }
+.suffix { composes: suffix from './_ui.m.css'; }
+.hasPrefix { composes: hasPrefix from './_ui.m.css'; }
+.hasSuffix { composes: hasSuffix from './_ui.m.css'; }
+.responsive { composes: responsive from './_ui.m.css'; }
+.valid { composes: valid from './_ui.m.css'; }
+.invalid { composes: invalid from './_ui.m.css'; }
+.absolute { composes: absolute from './_ui.m.css'; }
+.smallTypo { composes: smallTypo from './_ui.m.css'; }
+.defaultTypo { composes: defaultTypo from './_ui.m.css'; }
+.mediumTypo { composes: mediumTypo from './_ui.m.css'; }
+.largeTypo { composes: largeTypo from './_ui.m.css'; }
+.smallUI { composes: smallUI from './_ui.m.css'; }
+.defaultUI { composes: defaultUI from './_ui.m.css'; }
+.mediumUI { composes: mediumUI from './_ui.m.css'; }
+.largeUI { composes: largeUI from './_ui.m.css'; }
+
+.hasSchema { }
+.slideLabel { }
+.staticLabel { }
+.noLabel { }
+.enabled { }
+.disabled { }
+.filled, .outlined, .shaped { }
+
+.root {
+	margin-bottom: var(--line) !important;
+	display: block;
+	--slider-text: var(--text);
+	--ui-track-half-h: calc(var(--ui-track-h) / 2);
+}
+.wrapper {
+	--ui-track-half-h: calc(var(--ui-track-h) / 2);
+}
+
+.root.horizontal {
+	height: var(--ui-outer-h);
+}
+.root.labeled {
+	height: calc(var(--ui-outer-h) + var(--line));
+}
+
+.vertical .responsive.wrapper {
+	display: block;
+	width: auto;
+	height: 100%;
+	max-height: calc(var(--line) * 32);
+}
+.smallUI.wrapper,
+.defaultUI.wrapper {
+	top: calc(var(--ui-track-half-h) * -1);
+}
+.largeUI.wrapper {
+	margin-top: calc(var(--lineHalf) + var(--padding-top));
+	margin-bottom: calc(var(--lineHalf) - var(--padding-top));
+}
+/* Label */
+.horizontal label,
+.horizontal output {
+	position: relative;
+	margin-bottom: 0;
+}
+.vertical label,
+.vertical output {
+	position: relative;
+}
+.root .prefix {
+	padding-right: calc(var(--ui-inner-h) / 2);
+}
+.root .suffix {
+	padding-left: calc(var(--ui-inner-h) / 2);
+}
+.root label + br + output {
+	display: inline;
+}
+/* Slider Track */
+.track {
+	composes: inner from './cb.m.css';
+}
+.wrapper .track {
+	height: var(--ui-track-h);
+	position: relative;
+	padding: 0;
+	margin: 0;
+}
+.wrapper .track::before {
+	background: none;
+}
+.wrapper .track::after {
+	height: var(--ui-track-h);
+	border: none;
+	border-radius: var(--ui-track-half-h);
+}
+.wrapper.parentSchema .track::after {
+	background: var(--ui-track);
+}
+.wrapper:not(.parentSchema) .track::after {
+	background: var(--ui-flat);
+}
+.hasPrefix .track,
+.hasSuffix .track {
+	margin-top: calc(var(--margin-bottom) - var(--ui-track-h));
+}
+.largeUI.hasPrefix .track,
+.largeUI.hasSuffix .track {
+	margin-top: var(--margin-bottom);
+}
+/* Filled ('selected') Track */
+.fill {
+	border-radius: var(--ui-track-half-h);
+	background: var(--ui-accent);
+	z-index: 4;
+}
+
+/* Tick marks and labels */
+.tickMarks {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	z-index: 5;
+}
+.tickLabels {
+	position: absolute;
+	width: 100%;
+	top: var(--padding-top);
+}
+.largeUI .tickLabels {
+	top: var(--line);
+}
+.tickLabels data {
+	font-weight: var(--ui-font-weight);
+}
+.tickMarks.even {
+	display: flex;
+	justify-content: space-between;
+}
+.tickMarks i {
+	display: block;
+	width: var(--ui-track-h);
+	height: var(--ui-track-h);
+	border-radius: 50%;
+	background: var(--ui-flat);
+}
+.tickMarks i.current,
+.tickMarks i.current ~ i {
+	background: var(--ui-accent); /*var(--checkbox-ui-bg);*/
+}
+.tickMarks.even i:first-of-type,
+.tickMarks.even i:last-of-type {
+	visibility: hidden;
+}
+.tickLabels data,
+.tickMarks.uneven i {
+	position: absolute;
+}
+/* Center Transforms */
+.horizontal .tickLabels data,
+.horizontal .tickMarks.uneven i {
+	transform: translate(-50%, 0);
+}
+.horizontal .tickLabels data:first-of-type {
+	transform: translate(0, 0);
+}
+.horizontal .tickLabels data:last-of-type {
+	transform: translate(-100%, 0);
+}
+.vertical .tickLabels data:not(data:first-of-type):not(data:last-of-type),
+.vertical .tickMarks.uneven i {
+	transform: translate(0, -50%);
+}
+
+.output {
+	composes: ui-typo from './_ui.m.css';
+	position: absolute;
+	background-color: var(--ui-disabled);
+	color: var(--text-inverted);
+	display: inline-block;
+}
+.outputNone { display: none; }
+.output:not(.outputNone) { display: inline-block; }
+.outputInline {
+	text-indent: 0.3236em;
+}
+.outputTooltip output {
+	margin: 0;
+	padding: 0;
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	top: var(--line);
+	left: auto;
+	transform: translate(-50%, 0);
+	transition: opacity var(--ui-dpd-1) var(--ui-easing);
+}
+
+.outputTooltip output::before {
+	border-left: var(--grid-base) solid transparent;
+	border-right: var(--grid-base) solid transparent;
+	border-bottom: var(--grid-base) solid var(--ui-disabled);
+	content: "";
+	left: 50%;
+	margin-left: calc(var(--grid-base) * -1);
+	margin-top: calc(var(--grid-base) * -1);
+	position: absolute;
+	top: 0;
+}
+
+.vertical .outputTooltip output {
+	left: var(--line);
+	top: auto;
+	transform: translate(0, -50%);
+}
+
+.vertical .outputTooltip output::before {
+	border-bottom: var(--grid-base) solid transparent;
+	border-left: 0;
+	border-right: var(--grid-base) solid var(--ui-disabled);
+	border-top: var(--grid-base) solid transparent;
+	left: 0;
+	top: 50%;
+}
+
+/* vertical slider */
+.vertical .track {
+	border-radius: var(--ui-track-half-h);
+	transform-origin: 0 0;
+	transform: rotate(-90deg) translate(-100%, 0);
+}
+
+/* disabled and readonly styles */
+.disabled .track,
+.readonly .track {
+	opacity: 0.4;
+}
+/* valid style */
+.valid .track {
+	background-color: var(--ui-success);
+}
+/* invalid style */
+.invalid .track {
+	background-color: var(--ui-error);
+}
+
+.required { }
+
+.indeterminate .track, .buffer .track {
+	overflow: hidden;
+}
+.indeterminate .absorb,
+.buffer .absorb {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: var(--ui-track-h);
+	width: auto;
+	border-radius: var(--ui-track-half-h);
+	z-index: 3;
+
+}
+@keyframes indeterminateProgress {
+	0% { left: -35%; right: 100%; },
+	60% { left: 100%; right: -90%; },
+	100% { left: 100%; right: -90%; }
+}
+.determinate .fill {
+	width: 0px;
+	border-radius: var(--ui-track-half-h) 0 0 var(--ui-track-half-h);
+}
+.indeterminate .fill {
+	width: auto;
+	border-radius: var(--ui-track-half-h);
+	animation: indeterminateProgress calc(var(--ui-dpd-animation) * 2.8) cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+}
+@keyframes indeterminateProgress2 {
+	0% { left: -200%; right: 100%; },
+	60% { left: 107%; right: -8%; },
+	100% { left: 107%; right: -8%; }
+}
+.indeterminate .absorb {
+	background: var(--ui-border);
+	animation: indeterminateProgress2 calc(var(--ui-dpd-animation) * 2.8) cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+	animation-delay: calc(var(--ui-dpd-animation) * 1.5333333333);
+}
+@keyframes buffer {
+	0% { opacity: 1; background-position: 0px 0px; }
+	50% { opacity: 0; background-position: 0px 0px; }
+	100% { opacity: 1; background-position: -200px 0px; }
+}
+
+.buffer .track::after {
+	background: transparent;
+	background-image: radial-gradient(var(--ui-flat-accent) 0%, var(--ui-flat-accent) 16%, transparent 42%);
+	background-size: var(--ui-track-h) var(--ui-track-h);
+	background-position: 0px 0px;
+	animation: buffer calc(var(--ui-dpd-animation) * 3.2) infinite linear;
+	z-index: 2;
+}
+.buffer .absorb {
+	background: var(--ui-flat);
+}

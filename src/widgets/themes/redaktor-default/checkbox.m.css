@@ -1,0 +1,127 @@
+.root { composes: root from './cb.m.css'; }
+.parentSchema { composes: parentSchema from './cb.m.css'; }
+.wrapper { composes: wrapper from './cb.m.css'; }
+.input { composes: input from './cb.m.css'; }
+.inner { composes: inner from './cb.m.css'; }
+.disabled { composes: disabled from './cb.m.css'; }
+.enabled { composes: enabled from './cb.m.css'; }
+.invalid { composes: invalid from './cb.m.css'; }
+.valid { composes: valid from './cb.m.css'; }
+.normal { composes: normal from './cb.m.css'; }
+.toggle { composes: toggle from './cb.m.css'; }
+.toggleSwitch { composes: toggleSwitch from './cb.m.css'; }
+.filled { composes: filled from './cb.m.css'; }
+.outlined { composes: outlined from './cb.m.css'; }
+.shaped { composes: shaped from './cb.m.css'; }
+
+/* Normal (checkmark) mode */
+.checkIcon {
+	z-index: var(--zindex-fixed);
+	color: var(--root-text);
+	display: inline-block;
+	transition: all var(--ui-dpd-16) var(--ui-easing);
+	transform-origin: 50% 50% 0;
+	pointer-events: none;
+}
+.input:checked ~ .inner .checkIcon {
+	transform: scale(var(--check-scale));
+}
+.input:not(:checked) ~ .inner .checkIcon {
+	transform: scale(0);
+}
+.normal.outlined:not(.filled) .input:checked ~ .inner .checkIcon {
+	color: var(--root-text);
+}
+.normal:not(.outlined) .input:checked ~ .inner .checkIcon,
+.normal.filled .input:checked ~ .inner .checkIcon {
+	color: var(--ui-fill-text);
+}
+
+.normal:not(.outlined):not(.filled) .input:checked ~ .inner::after {
+	background: var(--ui-bg);
+}
+/* Toggle mode */
+/* TODO ? toggle with on off but without top-label margin */
+
+.toggle .inner {
+	padding-top: 0;
+}
+.toggle .inner::after {
+	border-radius: calc(var(--ui-inner-h) / 4);
+	position: relative;
+	padding: 0;
+	line-height: 0;
+	height: calc(var(--ui-inner-h) / 2);
+}
+.toggle:not(.filled) .inner::after {
+	background: linear-gradient(to right, var(--ui-bg), var(--ui-bg) 50%, var(--bg) 50%, var(--bg));
+	background-size: 200% 200%;
+	background-position: 75% 50%;
+	transition: background-position var(--ui-dpd-2) var(--ui-easing);
+}
+.toggle.outlined:not(.filled) .inner::after {
+	background: none;
+}
+.filled.toggle .inner::after {
+	background: linear-gradient(to right, var(--ui-fill), var(--ui-fill) 48%, var(--ui-flat) 52%, var(--ui-flat));
+}
+/* for shaped TODO
+.toggle.outlined:not(.filled) .inner::after {
+	background-size: 1px 2px;
+}
+.toggle.outlined:not(.filled) .input:checked ~ .inner::after {
+	background-size: 25% 5px;
+}
+*/
+.toggle .input:checked ~ .inner::after {
+	background-position: 25% 50%
+}
+
+.toggleSwitch {
+	composes: absolute from './_ui.m.css';
+	composes: toggleSwitch from './cb.m.css';
+	transform: translate(0, 0);
+	transition: transform var(--ui-dpd-2) var(--ui-easing);
+	background-color: var(--checkbox-full);
+	box-shadow: var(--ui-dp-2);
+	z-index: 2;
+}
+.enabled.wrapper:hover .input ~ .inner .toggleSwitch {
+	box-shadow: var(--ui-dp-1);
+}
+.enabled.wrapper:hover .input:checked ~ .inner .toggleSwitch {
+	background-color: var(--ui-flat-accent);
+}
+.toggleSwitch,
+.toggleSwitch::before {
+	width: var(--ui-inner-h);
+	height: var(--ui-inner-h);
+	border-radius: 50%;
+}
+.toggleSwitch::before {
+	content: "";
+	opacity: 0;
+}
+/* Checked styles */
+.input:checked ~ .inner .toggleSwitch {
+	transform: translate(100%, 0);
+}
+.enabled:not(:hover) .input.parentSchema:checked ~ .inner .toggleSwitch {
+	background-color: var(--ui-accent);
+}
+.enabled:not(:hover) .input:not(.parentSchema):checked ~ .inner .toggleSwitch {
+	background-color: var(--ui-border);
+}
+.enabled .parentSchema.input:checked ~ .inner .toggleSwitch {
+	border-color: var(--ui-border);
+}
+
+/* disabled and readonly styles */
+.disabled .toggleSwitch,
+.readonly .toggleSwitch {
+	background-color: var(--ui-border);
+	border-color: var(--ui-border);
+}
+
+.valid {}
+.invalid {}
