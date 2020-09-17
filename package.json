@@ -5,7 +5,7 @@
     "build": "dojo build"
   },
   "dependencies": {
-    "node-forge": "0.9.1",
+    "node-forge": "0.10.0",
     "@dojo/cli-upgrade-app": "^6.0.0",
     "@dojo/framework": "^6.0.3",
     "resize-observer-polyfill": "^1.5.1",
