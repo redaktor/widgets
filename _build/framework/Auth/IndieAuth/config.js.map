@@ -1,1 +1,0 @@
-{"version":3,"file":"config.js","sourceRoot":"","sources":["../../../../src/framework/Auth/IndieAuth/config.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA;;;;MAIE;IACW,QAAA,OAAO,GAAW,sDAAsD,CAAC;IACtF;;;MAGE;IACW,QAAA,aAAa,GAAW,KAAK,CAAC;IAC3C;;MAEE;IACW,QAAA,UAAU,GAAG;QACxB,IAAI,EAAE,CAAC,CAAC,GAAG,EAAE,GAAG,IAAI,CAAC;QACrB,GAAG,EAAG,CAAC,CAAC,GAAG,EAAE,GAAG,IAAI,CAAC;KACtB,CAAC"}

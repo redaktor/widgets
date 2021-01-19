@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../src/framework/Auth/authProviders/flickr/zh/index.ts"],"names":[],"mappings":";;;;;;;;;;;IAAA,IAAM,QAAQ,GAAG;QACf,WAAW,EAAE,kDAAkD;QAC/D,KAAK,EAAE;YACL,YAAY,EAAE,kEAAkE;gBAC9E,kDAAkD;YACpD,GAAG,EAAE,KAAK;YACV,MAAM,EAAE,QAAQ;SACjB;KACF,CAAC;IACF,kBAAe,QAAQ,CAAC"}

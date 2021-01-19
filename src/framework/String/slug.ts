@@ -1,4 +1,4 @@
-//import latin from './regex/regexLatin';
+// import latin from './regex/regexLatin';
 import comboMark from './regex/regexComboMark';
 import notUrlSafe from './regex/regexNotUrlSafe';
 import unicodeReplace from './lexicon/unicode';

@@ -4,22 +4,23 @@
 		"declaration": false,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
+		"jsx": "react",
+		"jsxFactory": "tsx",
 		"lib": [
 			"dom",
 			"es5",
 			"es2015.iterable",
 			"es2015.promise",
 			"es2015.symbol",
-			"es2015.symbol.wellknown",
-      "es2016"
+			"es2015.symbol.wellknown"
 		],
-		"module": "umd",
+		"module": "commonjs",
 		"moduleResolution": "node",
+		"noUnusedLocals": true,
 		"importHelpers": true,
 		"downlevelIteration": true,
-		"noImplicitAny": true,
-		"noImplicitThis": true,
-		"outDir": "_build/",
+		"outDir": "dist/dev/src/",
+		"baseUrl": "./",
 		"plugins": [
 			{
 				"name": "tslint-language-service",
@@ -28,11 +29,15 @@
 		],
 		"removeComments": false,
 		"sourceMap": true,
-		"strictNullChecks": true,
+		"strict": true,
 		"target": "es5",
-		"types": [ "intern" ]
+		"types": [ "intern" ],
+		"paths": {
+			"@dojo/widgets/*": ["src/*"]
+		}
 	},
 	"include": [
-		"./src/**/*.ts"
+		"./src/**/*.ts",
+		"./src/**/*.tsx"
 	]
 }

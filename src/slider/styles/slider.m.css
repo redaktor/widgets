@@ -1,0 +1,45 @@
+@import '../../common/styles/variables.css';
+
+.rootFixed {
+	
+}
+
+.wrapperFixed {
+	position: relative;
+}
+
+/* Reset the native input */
+.nativeInput {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+	border: none;
+	font-size: inherit;
+}
+.nativeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+.nativeInput:focus {
+  outline: none;
+}
+.nativeInput::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+/* microsoft IE10+ and Edge - eliminates default fills before and after thumb */
+.nativeInput::-ms-fill-lower {
+	background: transparent;
+	border: 0 none;
+}
+.nativeInput::-ms-fill-upper {
+	background: transparent;
+	border: 0 none;
+}
+.nativeInput::-ms-tooltip {
+	display: none;
+}

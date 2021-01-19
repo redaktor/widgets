@@ -1,0 +1,1415 @@
+.root {
+	width: 100%;
+	background-size: cover;
+}
+.activity, .object, .actor {
+	width: 100%;
+	background-size: cover;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	background-color: var(--surface, #fff);
+	transition: background-color, border-color var(--ui-dpd-1) var(--ui-easing);
+	box-shadow: var(--ui-dp-2);
+}
+.activity {
+	background-color: var(--ui-header);
+	border-top-left-radius: var(--ui-border-radius-emphasized, 0.25rem);
+	border-top-right-radius: var(--ui-border-radius-emphasized, 0.25rem);
+}
+.object, .actor {
+	max-height: 1024px;
+	padding-left: var(--plr);
+	padding-right: var(--plr);
+	border-radius: var(--ui-border-radius-emphasized, 0.25rem);
+	overflow: visible;
+}
+.activity + .object,
+.activity + .actor {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+.hasMedia {
+}
+
+.defaultTypo {
+	composes: l from './_typo.css';
+}
+.responsiveTypo {
+	composes: cards from './_typo.css';
+}
+.responsiveTypoSmall {
+	composes: cardsSmall from './_typo.css';
+}
+.serif {
+	composes: serif from './_typo.css';
+}
+.title {
+
+}
+.smallTitle {
+	composes: sans h5 from './_typo.css';
+}
+.largeTitle {
+	composes: sans cardsName from './_typo.css';
+}
+.object:not(.note) .title,
+.actor .title {
+	font-weight: var(--weight-semibold, 500);
+}
+/* A card can have an ActivityPub "major" type*/
+.note,
+.article,
+.image,
+.audio,
+.video,
+.event,
+.place,
+.page,
+.chat,
+.terminal,
+.map,
+.redaktor,
+.publicPost,
+.privatePost,
+.groupPost {
+}
+
+.image .title::before,
+.audio .title::before,
+.video .title::before,
+.place .title::before,
+.page .title::before {
+	display: inline-block;
+	font-family: 'redaktor' !important;
+	speak: never;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	width: 16px;
+	margin-left: -16px;
+	color: var(--text-muted);
+	vertical-align: baseline;
+}
+.image .title::before {
+	content: "\49";
+}
+.audio .title::before {
+	content: "\55";
+}
+.video .title::before {
+	content: "\56";
+}
+.place .title::before {
+	content: "\50";
+}
+.page .title::before {
+	content: "\53";
+}
+
+@media screen and (min-width: 360px) {
+	.root {
+		min-width: 320px;
+	}
+}
+
+.media {
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover; /*contain;*/
+	border-top-left-radius: var(--ui-border-radius-emphasized, 0.25rem);
+	border-top-right-radius: var(--ui-border-radius-emphasized, 0.25rem);
+	filter: contrast(80%);
+	overflow: hidden;
+	position: relative;
+	transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
+	transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91),
+		-webkit-filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
+	width: 100%;
+}
+.media:not(.baselined) {
+	margin: 0 0 var(--line) 0;
+}
+
+.activities {
+	composes: sans s from './_typo.css';
+	margin-bottom: calc(var(--mb, 16px) - var(--line, 16px)) !important;
+	padding-left: calc(46px + var(--lineHalf));
+	width: 100%;
+	order: 2;
+}
+
+.attributions {
+	composes: h3 from './_typo.css';
+	--toColor: var(--ui-border, gray);
+	--btnColor: var(--ui-bg, black);
+	display: flex;
+	position: relative;
+	align-items: baseline;
+	padding: 0 var(--p) 0 var(--p) !important;
+	box-sizing: border-box;
+	order: 3;
+	z-index: 3;
+}
+.attributions.hasAvatar {
+	padding: 0 var(--lineHalf) 0 var(--lineHalf) !important;
+}
+.summary {
+	display: flex;
+	height: var(--line);
+  list-style: none;
+	cursor: pointer;
+}
+.summary::-webkit-details-marker {
+  display: none;
+}
+.summary:focus {
+	outline: none;
+}
+.titleWrapper {
+	padding: var(--line) var(--p) 0 var(--p);
+	order: 4;
+	z-index: 2;
+}
+.article .titleWrapper {
+	--mlr: calc(var(--p) - var(--lineHalf));
+	margin: var(--line) var(--mlr) var(--pt) var(--mlr);
+	padding: 0 var(--lineHalf);
+	background: var(--surface, #fff);
+	order: 1;
+}
+.article.hasBookmark .titleWrapper,
+.article.hasTopics .titleWrapper {
+	margin: var(--line2) var(--mlr) var(--pt) var(--mlr);
+}
+.article.hasMedia .titleWrapper {
+	margin: calc(var(--line) * -1) var(--mlr) var(--pt) var(--mlr);
+}
+.article .titleWrapper .smallTitle,
+.article .titleWrapper .largeTitle {
+	margin-bottom: calc(var(--mb, 16px) - var(--pt));
+}
+.contentWrapper {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 auto;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	max-width: 64ch;
+	padding: var(--line) var(--p) var(--line) var(--p);
+	order: 5;
+}
+.event .contentWrapper {
+	order: 1;
+	padding-bottom: 0;
+}
+.object:not(.article) .titleWrapper + .contentWrapper,
+.actor .titleWrapper + .contentWrapper {
+	padding-top: 0;
+}
+.contentWrapper:first-child {
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
+}
+.contentWrapper + details {
+	order: 6;
+}
+
+.root .activityBtn {
+	position: relative;
+	margin-top: calc(var(--m) + var(--pt));
+	margin-bottom: calc(var(--m) - var(--pt));
+	font-weight: var(--weight-semibold, 500);
+	order: 7;
+}
+.activityBtn:not(:hover):not(:focus) {
+	background-color: var(--bg) !important;
+}
+
+.actionWrapper {
+	display: none;
+	background-color: var(--bg);
+	flex-direction: row;
+	align-items: center;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	height: var(--line2);
+	order: 7;
+}
+details[open] + .actionWrapper,
+.contentWrapper + .actionWrapper,
+.activityBtn + .actionWrapper {
+	display: flex;
+}
+
+.object:not(.article) .attributions {
+	margin: var(--line) 0 0 0;
+}
+.hasBookmark:not(.article):not(.hasMedia) .attributions,
+.hasTopics:not(.article):not(.hasMedia) .attributions,
+.hasBookmark:not(.article):not(.hasMedia) .activities,
+.hasTopics:not(.article):not(.hasMedia) .activities {
+	margin: var(--line2) 0 0 0;
+}
+
+.activity .attributions,
+.object:not(.article) .activities + .attributions,
+.hasBookmark:not(.article):not(.hasMedia) .activities + .attributions,
+.hasTopics:not(.article):not(.hasMedia) .activities + .attributions  {
+	margin: 0;
+}
+.event .attributions {
+	margin-top: 0 !important;
+}
+.metaWrapper {
+	position: relative;
+	flex-grow: 1;
+	min-width: 0;
+	max-width: calc(100% - 56px);
+}
+.activity .metaWrapper {
+	margin: 0;
+}
+.actor .metaWrapper,
+.object .metaWrapper {
+	padding-right: 16px;
+}
+.meAvatar,
+.avatar {
+	z-index: 0;
+	margin-right: 8px;
+	width: 38px;
+	margin-left: -16px;
+}
+.attributions[open] .avatar {
+	width: 56px;
+	margin-left: -20px;
+}
+.summary:focus .avatar > div:first-child {
+	border: 1px solid var(--text-muted);
+}
+.activityIcon {
+	--actcolor: var(--r-grey, #808080);
+	composes: icon from './icon.m.css';
+	min-width: var(--line2, 48px);
+	min-height: var(--line3, 48px);
+	position: absolute;
+	right: 0px;
+}
+.activityIcon i {
+	/* privacy icon */
+	padding-left: calc(var(--lineHalf) - 0.5px);
+}
+.activityIcon::before {
+	/* font-size: var(--line2, 32px);
+  position: absolute;
+  top: calc(var(--line, 16px) + 2px); */
+	color: var(--text-muted);
+  opacity: 0.8;
+}
+.like {
+	composes: red from './_color.m.css';
+}
+.like .activityIcon::before {
+	color: var(--m-200, var(--r-red, red));
+	content: '\6c';
+}
+/*'Activity'|'Create'|'Delete'|'Add'|'Remove'|'Update'|'Announce'
+'Like'|'Dislike'|'View'|'Read'|'Listen'|
+'Accept'|'Reject'|'Follow'|'Invite'|'Move'|
+'Join'|'Leave'|
+
+
+'Travel'|'Arrive'|
+'Offer'|'Question'|
+'Undo'
+'Block'|'Flag'|'Ignore'|
+'TentativeReject'|'TentativeAccept'
+*/
+.byline {
+}
+.kicker {
+	color: var(--kicker);
+	margin: 0 0 calc(var(--mb) - var(--line)) 0 !important;
+}
+.actorName,
+.petname,
+.handle {
+	margin: 0 !important;
+}
+.petname + .handle {
+	opacity: 0.4;
+}
+
+.actorName,
+.petname,
+.kicker,
+.handle,
+.acted {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	z-index: 1;
+}
+.root .actorName,
+.petname,
+.actorName + .handle {
+	padding: 0;
+}
+.metaWrapper,
+.actorName,
+.acted,
+.kicker,
+.handle,
+.topic {
+	composes: sans s from './_typo.css';
+}
+.actorName,
+.handle {
+	color: var(--text-muted);
+}
+.attributions[open] .actorName {
+	color: var(--text);
+}
+.acted {
+	composes: primary from './_color.m.css';
+	font-weight: var(--weight-semibold,500);
+	padding-left: var(--lineHalf);
+	margin-top: 0 !important;
+	color: var(--text-muted, #333);
+	order: 3;
+}
+.wellKnown + .acted {
+	color: var(--text, #000);
+}
+.attributions[open] ~ .acted {
+	padding-left: var(--lineHalf);
+}
+/*
+.followAction,
+.unfollowAction {
+	display: flex;
+	align-items: baseline;
+}
+*/
+p.actorDetails {
+	padding-left: 44px;
+	margin-bottom: calc(var(--mb) - var(--line));
+}
+details.followAction {
+	padding-left: 44px;
+	min-height: var(--line3);
+}
+details.followAction > * {
+	display:inline-block !important;
+}
+summary.followBtn {
+	float: right;
+	min-width: 100%;
+	margin-top: var(--line);
+}
+.followAction input {
+	padding-right: var(--lineHalf);
+	font-weight: 500;
+}
+.followBtn button,
+.followBtn button::before {
+	margin-bottom: 0 !important;
+	border-bottom-left-radius: 0px !important;
+}
+/* ACTS AS DETAILS / SUMMARY FOR unlock */
+.followBtn button {
+	pointer-events: none;
+}
+.followAction[open] .followBtn button {
+	pointer-events: all;
+}
+
+.followAction[open] .followBtn {
+	min-width: 38.2%;
+}
+/*
+.followAction label {
+	margin-top: calc(var(--line) * -1);
+	background-color: var(--ui-header) !important;
+}
+*/
+.unfollowAction {
+	margin-top: var(--line);
+}
+.unfollowAction button {
+	margin-bottom: 0 !important;
+}
+
+.attributions[open] {
+	margin-bottom: var(--pt) !important;
+}
+.followerLabel {
+	font-weight: var(--weight-semibold,500);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.root .trustChip {
+	margin-top: calc(var(--pt) + var(--ui-border-width-emphasized,2px)) !important;
+	margin-bottom: calc(var(--mb) - var(--pt)) !important;
+}
+.me.trustChip {
+	margin-top: var(--line) !important;
+}
+
+.privacyIcon {
+	margin: calc(var(--size) * -1) 5px 0 10px;
+}
+.actorName,
+.kicker,
+.topic {
+	font-weight: var(--weight-semibold, 500);
+}
+.petname + .actorName {
+	font-weight: var(--weight, 400);
+}
+.petname {
+	composes: l from './_typo.css';
+	font-weight: var(--weight-bold, 700);
+	color: var(--text);
+	margin-bottom: calc(var(--mb, 16px) - var(--line)) !important;
+	padding-top: 0px !important;
+}
+.petname::before {
+	content: '\40\2009';
+	color: var(--color-redaktor);
+	font-family: 'redaktor' !important;
+	speak: never;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.privacy {
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	padding: 0;
+}
+.content {
+	color: var(--text);
+}
+
+.hasMore .defaultTypo,
+.hasMore .responsiveTypo {
+	margin-bottom: calc(var(--mb, 16px) - var(--line, 15px));
+}
+.article .attributions,
+.media .attributions,
+.header + .attributions {
+	margin: 0;
+}
+.attributions.wellKnown {
+}
+.publicPost .attributions {
+	--toColor: var(--ui-public, green);
+}
+.groupPost .attributions {
+	--toColor: var(--ui-group, yellow);
+}
+.privatePost .attributions {
+	--toColor: var(--ui-private, red);
+}
+
+.attributions.wellKnown::after {
+	opacity: 0.8;
+}
+.attributions > i {
+	margin: 0;
+	padding: 0;
+	font-size: inherit !important;
+}
+.attributions::after {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 1px;
+	background: var(--ui-border);
+	position: absolute;
+	left: 0;
+	opacity: 0.618;
+	background: linear-gradient(90deg, transparent 4px, var(--toColor) 50%, transparent 100%);
+}
+.object .attributions::after {
+	bottom: 0;
+}
+.activity .attributions::after {
+	top: -2px;
+}
+details summary + .contentWrapper {
+	padding-top: 0 !important;
+}
+
+.actionButtons {
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+}
+.actionButtons > button {
+	border-radius: 0 !important;
+	margin: 0 !important;
+}
+/*
+.actionButtons > button > i,
+.activityBtn > i {
+	--size: 1.6666em;
+}
+*/
+.actionButtons:hover {
+	cursor: pointer;
+}
+.actionIcons {
+	composes: h3 from './_typo.css';
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	box-sizing: border-box;
+	flex-grow: 1;
+	justify-content: flex-end;
+}
+.actionIcons > * {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* .media */
+.baselined {
+	margin: 0 0 var(--lineHalf) 0;
+	height: calc(var(--line) * var(--l, 3) + var(--lineHalf));
+}
+.root:hover .media {
+	filter: contrast(100%);
+}
+
+.media:first-child {
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
+}
+.media:not(.baselined)::before {
+	display: block;
+	content: '';
+}
+.m1by1:not(.baselined)::before {
+	margin-top: 100%;
+}
+.m3by2:not(.baselined)::before {
+	margin-top: 66.66%;
+}
+.m16by9:not(.baselined)::before {
+	margin-top: 56.25%;
+}
+.m4by1:not(.baselined)::before {
+	margin-top: 25%;
+}
+
+@media screen and (min-width: 240px) {
+	:global .esri-widget--panel {
+		--mcw: 252px;
+	}
+	.m16by9 {
+		--l: 8;
+	}
+	.m3by2 {
+		--l: 10;
+	}
+	.m1by1 {
+		--l: 16;
+	}
+}
+@media screen and (min-width: 310px) {
+	.m16by9 {
+		--l: 9;
+	}
+	.m3by2 {
+		--l: 11;
+	}
+	.m1by1 {
+		--l: 17;
+	}
+}
+@media screen and (min-width: 340px) {
+	:global .esri-widget--panel {
+		--mcw: 280px;
+	}
+	.m16by9 {
+		--l: 10;
+	}
+	.m3by2 {
+		--l: 12;
+	}
+	.m1by1 {
+		--l: 18;
+	}
+}
+@media screen and (min-width: 380px) {
+	:global .esri-widget--panel {
+		--mcw: 300px;
+	}
+	.m16by9 {
+		--l: 11;
+	}
+	.m3by2 {
+		--l: 13;
+	}
+	.m1by1 {
+		--l: 19;
+	}
+}
+
+@media screen and (min-width: 420px) {
+	.m16by9 {
+		--l: 12;
+	}
+	.m3by2 {
+		--l: 14;
+	}
+	.m1by1 {
+		--l: 20;
+	}
+	.m4by1 {
+		--l: 5;
+	}
+}
+@media screen and (min-width: 482px) {
+	.m1by1 {
+		--l: 21;
+	}
+}
+
+@media screen and (min-width: 508px) {
+	.root {
+		--p: 5.203vw;
+	}
+}
+@media screen and (min-width: 560px) {
+	.m16by9 {
+		--l: 13;
+	}
+	.m3by2 {
+		--l: 15;
+	}
+	.m1by1 {
+		--l: 22;
+	}
+}
+@media screen and (min-width: 582px) {
+	.m1by1 {
+		--l: 23;
+	}
+}
+@media screen and (min-width: 604px) {
+	.m16by9 {
+		--l: 14;
+	}
+	.m3by2 {
+		--l: 16;
+	}
+	.m1by1 {
+		--l: 24;
+	}
+	.m4by1 {
+		--l: 6;
+	}
+}
+@media screen and (min-width: 614px) {
+	.m1by1 {
+		--l: 25;
+	}
+}
+@media screen and (min-width: 648px) {
+	.m16by9 {
+		--l: 15;
+	}
+	.m3by2 {
+		--l: 18;
+	}
+	.m1by1 {
+		--l: 26;
+	}
+}
+@media screen and (min-width: 672px) {
+	.m1by1 {
+		--l: 27;
+	}
+}
+@media screen and (min-width: 692px) {
+	.m16by9 {
+		--l: 16;
+	}
+	.m3by2 {
+		--l: 19;
+	}
+	.m1by1 {
+		--l: 28;
+	}
+	.m4by1 {
+		--l: 7;
+	}
+}
+/* aside open */
+@media screen and (min-width: 712px) {
+	.m16by9 {
+		--l: 11;
+	}
+	.m3by2 {
+		--l: 13;
+	}
+	.m1by1 {
+		--l: 19;
+	}
+	.m4by1 {
+		--l: 5;
+	}
+}
+@media screen and (min-width: 724px) {
+	.m1by1 {
+		--l: 20;
+	}
+}
+@media screen and (min-width: 752px) {
+	.m16by9 {
+		--l: 12;
+	}
+	.m3by2 {
+		--l: 14;
+	}
+	.m1by1 {
+		--l: 21;
+	}
+}
+@media screen and (min-width: 784px) {
+	.root {
+		--p: 3.33333333vw;
+	}
+	.contentWrapper {
+		max-width: 80ch;
+	}
+	.m16by9 {
+		--l: 13;
+	}
+	.m3by2 {
+		--l: 16;
+	}
+	.m1by1 {
+		--l: 22;
+	}
+	.m4by1 {
+		--l: 6;
+	}
+}
+@media screen and (min-width: 800px) {
+	.m1by1 {
+		--l: 24;
+	}
+}
+@media screen and (min-width: 880px) {
+	.m16by9 {
+		--l: 14;
+	}
+	.m3by2 {
+		--l: 17;
+	}
+	.m1by1 {
+		--l: 25;
+	}
+	.m4by1 {
+		--l: 7;
+	}
+}
+@media screen and (min-width: 920px) {
+	.contentWrapper {
+		max-width: 100ch;
+	}
+	.m16by9 {
+		--l: 15;
+	}
+	.m3by2 {
+		--l: 16;
+	}
+	.m1by1 {
+		--l: 26;
+	}
+}
+/* 2 col */
+@media screen and (min-width: 940px) {
+	:global .esri-widget--panel {
+		--mcw: 252px;
+	}
+	.m16by9 {
+		--l: 9;
+	}
+	.m3by2 {
+		--l: 10;
+	}
+	.m1by1 {
+		--l: 16;
+	}
+	.m4by1 {
+		--l: 4;
+	}
+}
+@media screen and (min-width: 1004px) {
+	:global .esri-widget--panel {
+		--mcw: 280px;
+	}
+	.m3by2 {
+		--l: 11;
+	}
+}
+@media screen and (min-width: 1028px) {
+	.m16by9 {
+		--l: 10;
+	}
+	.m3by2 {
+		--l: 12;
+	}
+	.m1by1 {
+		--l: 17;
+	}
+}
+@media screen and (min-width: 1064px) {
+	:global .esri-widget--panel {
+		--mcw: 300px;
+	}
+	.m1by1 {
+		--l: 18;
+	}
+}
+@media screen and (min-width: 1104px) {
+	.m16by9 {
+		--l: 11;
+	}
+	.m3by2 {
+		--l: 13;
+	}
+	.m1by1 {
+		--l: 19;
+	}
+	.m4by1 {
+		--l: 5;
+	}
+}
+@media screen and (min-width: 1140px) {
+	.m1by1 {
+		--l: 20;
+	}
+}
+@media screen and (min-width: 1180px) {
+	.m16by9 {
+		--l: 12;
+	}
+	.m3by2 {
+		--l: 14;
+	}
+	.m1by1 {
+		--l: 21;
+	}
+}
+@media screen and (min-width: 1240px) {
+	.m1by1 {
+		--l: 22;
+	}
+}
+@media screen and (min-width: 1264px) {
+	.m16by9 {
+		--l: 13;
+	}
+	.m3by2 {
+		--l: 15;
+	}
+	.m1by1 {
+		--l: 23;
+	}
+	.m4by1 {
+		--l: 6;
+	}
+}
+@media screen and (min-width: 1300px) {
+	.m1by1 {
+		--l: 24;
+	}
+}
+/* 3 col */
+@media screen and (min-width: 1366px) {
+	.root {
+		--p: 1.818181818vw;
+	}
+	:global .esri-widget--panel {
+		--mcw: 252px;
+	}
+	.m16by9 {
+		--l: 9;
+	}
+	.m3by2 {
+		--l: 10;
+	}
+	.m1by1 {
+		--l: 16;
+	}
+	.m4by1 {
+		--l: 4;
+	}
+}
+@media screen and (min-width: 1394px) {
+	:global .esri-widget--panel {
+		--mcw: 300px;
+	}
+	.m16by9 {
+		--l: 10;
+	}
+	.m3by2 {
+		--l: 11;
+	}
+	.m1by1 {
+		--l: 17;
+	}
+}
+@media screen and (min-width: 1458px) {
+	.m1by1 {
+		--l: 18;
+	}
+}
+@media screen and (min-width: 1522px) {
+	.m16by9 {
+		--l: 11;
+	}
+	.m3by2 {
+		--l: 12;
+	}
+	.m1by1 {
+		--l: 19;
+	}
+}
+@media screen and (min-width: 1586px) {
+	.m1by1 {
+		--l: 20;
+	}
+	.m4by1 {
+		--l: 5;
+	}
+}
+@media screen and (min-width: 1650px) {
+	.m16by9 {
+		--l: 12;
+	}
+	.m3by2 {
+		--l: 13;
+	}
+	.m1by1 {
+		--l: 21;
+	}
+}
+@media screen and (min-width: 1716px) {
+	.m1by1 {
+		--l: 22;
+	}
+}
+@media screen and (min-width: 1766px) {
+	.m16by9 {
+		--l: 13;
+	}
+	.m3by2 {
+		--l: 14;
+	}
+	.m1by1 {
+		--l: 23;
+	}
+	.m4by1 {
+		--l: 6;
+	}
+}
+@media screen and (min-width: 1844px) {
+	.m1by1 {
+		--l: 24;
+	}
+}
+@media screen and (min-width: 1864px) {
+	.m16by9 {
+		--l: 14;
+	}
+	.m3by2 {
+		--l: 15;
+	}
+	.m1by1 {
+		--l: 25;
+	}
+}
+/* 4 col */
+@media screen and (min-width: 1900px) {
+	.root {
+		--p: 1.123636363vw;
+	}
+	.m16by9 {
+		--l: 10;
+	}
+	.m3by2 {
+		--l: 12;
+	}
+	.m1by1 {
+		--l: 18;
+	}
+	.m4by1 {
+		--l: 4;
+	}
+}
+@media screen and (min-width: 1944px) {
+	.m16by9 {
+		--l: 11;
+	}
+	.m3by2 {
+		--l: 13;
+	}
+	.m1by1 {
+		--l: 19;
+	}
+	.m4by1 {
+		--l: 5;
+	}
+}
+@media screen and (min-width: 2040px) {
+	.m1by1 {
+		--l: 20;
+	}
+}
+@media screen and (min-width: 2084px) {
+	.m16by9 {
+		--l: 12;
+	}
+	.m3by2 {
+		--l: 14;
+	}
+}
+@media screen and (min-width: 2124px) {
+	.m1by1 {
+		--l: 21;
+	}
+}
+@media screen and (min-width: 2224px) {
+	.m16by9 {
+		--l: 13;
+	}
+	.m3by2 {
+		--l: 15;
+	}
+	.m1by1 {
+		--l: 22;
+	}
+	.m4by1 {
+		--l: 6;
+	}
+}
+@media screen and (min-width: 2324px) {
+	.m1by1 {
+		--l: 23;
+	}
+}
+@media screen and (min-width: 2364px) {
+	.m16by9 {
+		--l: 14;
+	}
+	.m3by2 {
+		--l: 16;
+	}
+	.m1by1 {
+		--l: 24;
+	}
+}
+@media screen and (min-width: 2434px) {
+	.m1by1 {
+		--l: 25;
+	}
+}
+@media screen and (min-width: 2504px) {
+	.m16by9 {
+		--l: 15;
+	}
+	.m3by2 {
+		--l: 17;
+	}
+	.m4by1 {
+		--l: 7;
+	}
+}
+@media screen and (min-width: 2524px) {
+	.m1by1 {
+		--l: 26;
+	}
+}
+@media screen and (min-width: 2644px) {
+	.m16by9 {
+		--l: 16;
+	}
+	.m3by2 {
+		--l: 18;
+	}
+	.m1by1 {
+		--l: 27;
+	}
+}
+@media screen and (min-width: 2714px) {
+	.m1by1 {
+		--l: 28;
+	}
+}
+@media screen and (min-width: 2784px) {
+	.m16by9 {
+		--l: 17;
+	}
+	.m3by2 {
+		--l: 19;
+	}
+	.m1by1 {
+		--l: 29;
+	}
+	.m4by1 {
+		--l: 8;
+	}
+}
+/* 5 col */
+@media screen and (min-width: 2680px) {
+	:global .esri-widget--panel {
+		--mcw: 320px;
+	}
+	.m16by9 {
+		--l: 12;
+	}
+	.m3by2 {
+		--l: 14;
+	}
+	.m1by1 {
+		--l: 20;
+	}
+	.m4by1 {
+		--l: 5;
+	}
+}
+@media screen and (min-width: 2708px) {
+	.m1by1 {
+		--l: 21;
+	}
+}
+@media screen and (min-width: 2850px) {
+	.m16by9 {
+		--l: 13;
+	}
+	.m3by2 {
+		--l: 15;
+	}
+	.m1by1 {
+		--l: 22;
+	}
+}
+@media screen and (min-width: 2888px) {
+	.m1by1 {
+		--l: 23;
+	}
+}
+@media screen and (min-width: 2998px) {
+	.m16by9 {
+		--l: 14;
+	}
+	.m3by2 {
+		--l: 16;
+	}
+	.m1by1 {
+		--l: 24;
+	}
+	.m4by1 {
+		--l: 6;
+	}
+}
+@media screen and (min-width: 3132px) {
+	.m1by1 {
+		--l: 25;
+	}
+}
+@media screen and (min-width: 3220px) {
+	.m16by9 {
+		--l: 15;
+	}
+	.m3by2 {
+		--l: 17;
+	}
+	.m1by1 {
+		--l: 26;
+	}
+}
+@media screen and (min-width: 3304px) {
+	.m1by1 {
+		--l: 27;
+	}
+	.m4by1 {
+		--l: 7;
+	}
+}
+@media screen and (min-width: 3424px) {
+	.m16by9 {
+		--l: 16;
+	}
+	.m3by2 {
+		--l: 18;
+	}
+	.m1by1 {
+		--l: 28;
+	}
+}
+/* 6 col max */
+@media screen and (min-width: 3580px) {
+	:global .esri-widget--panel {
+		--mcw: 360px;
+	}
+	.m16by9 {
+		--l: 14;
+	}
+	.m3by2 {
+		--l: 15;
+	}
+	.m1by1 {
+		--l: 24;
+	}
+	.m4by1 {
+		--l: 6;
+	}
+}
+@media screen and (min-width: 3820px) {
+	.m16by9 {
+		--l: 15;
+	}
+	.m3by2 {
+		--l: 16;
+	}
+	.m1by1 {
+		--l: 25;
+	}
+}
+
+:global .esri-ui-corner .esri-expand .esri-widget--panel,
+:global .esri-ui-corner .esri-expand .esri-widget--panel-height-only,
+:global .esri-ui-corner .esri-component > .esri-widget--panel,
+:global .esri-ui-corner .esri-component.esri-widget--panel {
+	width: var(--mcw, 300px);
+}
+
+.ribbon {
+	height: 188px;
+	position: relative;
+	margin-bottom: 30px;
+	background: url(); /* TODO */
+	background-size: cover;
+	text-transform: uppercase;
+	color: white;
+}
+.bookmark {
+	width: var(--p);
+	padding: calc(var(--lineHalf) + var(--pt)) 0;
+	position: absolute;
+	top: -8px;
+	right: var(--lineHalf);
+	text-align: center;
+	border-top-left-radius: 3px;
+	color: var(--c, #000);
+	background: var(--bg, #f47530);
+}
+.bookmark:before {
+	height: 0px;
+	width: 0px;
+	right: -8px;
+	top: 0px;
+	border-bottom: 8px solid #555;
+	border-right: 8px solid transparent;
+}
+.bookmark:before,
+.bookmark:after {
+	content: '';
+	position: absolute;
+}
+.bookmark:after {
+	--pHalf: calc(var(--p) * 0.5 + 0.5px);
+	width: 0;
+	height: 0;
+	left: 0;
+	bottom: calc(var(--p) * -0.5 + 0.5px);
+	border-left: var(--pHalf) solid var(--bg, #f47530);
+	border-right: var(--pHalf) solid var(--bg, #f47530);
+	border-bottom: var(--pHalf) solid transparent;
+}
+.topic {
+	position: absolute;
+	top: var(--lineHalf);
+	padding-right: var(--pt);
+	color: var(--c, #000);
+	background: linear-gradient(
+		to bottom,
+		transparent 0%,
+		transparent 7px,
+		var(--bg, #00b3ed) 7px,
+		var(--bg, #00b3ed) 100%
+	);
+	font-weight: var(--weight-semibold);
+	box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.3);
+}
+.topic:before,
+.topic:after {
+	content: '';
+	position: absolute;
+}
+.topic:before {
+	width: 7px;
+	height: 100%;
+	top: 7px;
+	left: -7px;
+	padding: 0 0 7px;
+	background: var(--bg, #00b3ed);
+	border-radius: 5px 0 0 5px;
+}
+.topic:after {
+	width: 5px;
+	height: 5px;
+	bottom: -5px;
+	left: -5px;
+	background: #fff;
+	border-radius: 5px 0 0 5px;
+	opacity: 0.4;
+}
+/*
+.details {
+	margin-top: calc((var(--line) - var(--pt)) * -1);
+}
+.summary {
+	composes: meta from './_typo.css';
+	color: var(--text-muted);
+	padding-top: 0 !important;
+	padding-left: calc(1.818181818vw - 1.06em);
+}
+.details .summary {
+	box-sizing: border-box;
+	outline: none;
+	border-top: var(--ui-border-width-emphasized,2px) dashed transparent;
+}
+.details .summary,
+.details .summary:hover {
+	cursor: pointer;
+}
+
+.details .summary:focus {
+	outline: none;
+	border-top-color: var(--ui-bg);
+}
+*/

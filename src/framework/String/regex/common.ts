@@ -61,5 +61,6 @@ export const UnicodeWord = RegExp([
 ].join('|'), 'g');
 /** Used to match words composed of alphanumeric characters. */
 export const AsciiWord = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
+export const AsciiWordBreak = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+|\n+/gs;
 /** Used to match Latin Unicode letters (excluding mathematical operators). */
 export const Latin = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g;
